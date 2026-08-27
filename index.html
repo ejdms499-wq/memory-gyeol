@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>기억결 — 기억을 있는 그대로</title>
+
+  <style>
+    /* =========================================
+       기본 설정
+    ========================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f1eb;
+      --paper: rgba(255, 255, 255, 0.72);
+      --text: #20201d;
+      --sub: #77746d;
+      --line: rgba(32, 32, 29, 0.13);
+      --accent: #31372f;
+      --accent-soft: #dfe3da;
+      --danger: #a35151;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family:
+        "Pretendard",
+        "Noto Sans KR",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(228, 221, 207, 0.75),
+          transparent 33%
+        ),
+        radial-gradient(
+          circle at 85% 85%,
+          rgba(212, 218, 206, 0.6),
+          transparent 30%
+        ),
+        var(--bg);
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+
+    /* =========================================
+       전체 레이아웃
+    ========================================= */
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      width: 100%;
+      padding: 28px 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+
+      border: 1px solid rgba(32, 32, 29, 0.25);
+      border-radius: 50%;
+
+      position: relative;
+    }
+
+    .logo-mark::before {
+      content: "";
+      position: absolute;
+
+      width: 10px;
+      height: 10px;
+
+      left: 5px;
+      top: 5px;
+
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.78;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+
+      width: 8px;
+      height: 8px;
+
+      right: 4px;
+      bottom: 4px;
+
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: 21px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .header-label {
+      font-size: 11px;
+      color: var(--sub);
+
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================
+       메인
+    ========================================= */
+
+    .main {
+      width: 100%;
+      max-width: 1180px;
+
+      margin: 0 auto;
+      padding: 92px 40px 60px;
+
+      flex: 1;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 90px;
+      align-items: center;
+    }
+
+
+    /* =========================================
+       왼쪽 소개
+    ========================================= */
+
+    .intro {
+      max-width: 470px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 26px;
+
+      font-size: 11px;
+      color: var(--sub);
+
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 28px;
+      height: 1px;
+
+      background: var(--sub);
+      opacity: 0.55;
+    }
+
+    .intro h1 {
+      margin-bottom: 28px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: clamp(42px, 5vw, 67px);
+      font-weight: 400;
+
+      line-height: 1.14;
+      letter-spacing: -0.045em;
+    }
+
+    .intro h1 span {
+      color: #6e7469;
+    }
+
+    .intro-copy {
+      max-width: 410px;
+
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--sub);
+
+      word-break: keep-all;
+    }
+
+    .principles {
+      margin-top: 42px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .principle {
+      padding: 8px 12px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      font-size: 11px;
+      color: #65635d;
+
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+
+    /* =========================================
+       입력 카드
+    ========================================= */
+
+    .memory-card {
+      width: 100%;
+
+      padding: 38px;
+
+      border: 1px solid rgba(32, 32, 29, 0.12);
+      border-radius: 24px;
+
+      background: var(--paper);
+
+      box-shadow:
+        0 28px 70px rgba(49, 49, 42, 0.08);
+
+      backdrop-filter: blur(16px);
+    }
+
+    .card-number {
+      margin-bottom: 18px;
+
+      font-family: Georgia, serif;
+      font-size: 12px;
+
+      color: var(--sub);
+      letter-spacing: 0.1em;
+    }
+
+    .memory-card h2 {
+      margin-bottom: 9px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: 27px;
+      font-weight: 400;
+
+      letter-spacing: -0.03em;
+    }
+
+    .card-description {
+      margin-bottom: 30px;
+
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--sub);
+
+      word-break: keep-all;
+    }
+
+
+    /* =========================================
+       기억 입력창
+    ========================================= */
+
+    .memory-input-wrap {
+      position: relative;
+    }
+
+    #memoryInput {
+      width: 100%;
+      min-height: 210px;
+
+      padding: 22px 22px 50px;
+
+      resize: vertical;
+
+      border: 1px solid rgba(32, 32, 29, 0.16);
+      border-radius: 15px;
+
+      outline: none;
+
+      color: var(--text);
+      background: rgba(250, 249, 246, 0.82);
+
+      font-size: 15px;
+      line-height: 1.85;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    #memoryInput::placeholder {
+      color: #aaa69d;
+    }
+
+    #memoryInput:focus {
+      border-color: rgba(49, 55, 47, 0.45);
+
+      background: rgba(255, 255, 255, 0.92);
+
+      box-shadow:
+        0 0 0 4px rgba(49, 55, 47, 0.06);
+    }
+
+    .character-count {
+      position: absolute;
+
+      right: 16px;
+      bottom: 14px;
+
+      font-size: 10px;
+      color: #a29f97;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================
+       도움말
+    ========================================= */
+
+    .memory-hint {
+      margin-top: 15px;
+
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+
+      font-size: 11px;
+      line-height: 1.65;
+      color: #8a877f;
+    }
+
+    .hint-dot {
+      width: 5px;
+      height: 5px;
+
+      margin-top: 6px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+      background: #8f948a;
+    }
+
+
+    /* =========================================
+       버튼
+    ========================================= */
+
+    .submit-row {
+      margin-top: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .privacy-note {
+      max-width: 230px;
+
+      font-size: 10px;
+      line-height: 1.55;
+      color: #97938c;
+    }
+
+    #startButton {
+      min-width: 155px;
+
+      padding: 15px 22px;
+
+      border: 0;
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      color: #f7f6f2;
+      background: var(--accent);
+
+      font-size: 13px;
+      font-weight: 500;
+
+      transition:
+        transform 0.18s ease,
+        opacity 0.18s ease,
+        background 0.18s ease;
+    }
+
+    #startButton:hover {
+      transform: translateY(-1px);
+      background: #22271f;
+    }
+
+    #startButton:active {
+      transform: translateY(0);
+    }
+
+    #startButton:disabled {
+      cursor: wait;
+      opacity: 0.55;
+      transform: none;
+    }
+
+
+    /* =========================================
+       상태 메시지
+    ========================================= */
+
+    #statusMessage {
+      min-height: 20px;
+      margin-top: 18px;
+
+      font-size: 12px;
+      line-height: 1.6;
+
+      color: var(--sub);
+    }
+
+    #statusMessage.error {
+      color: var(--danger);
+    }
+
+
+    /* =========================================
+       하단
+    ========================================= */
+
+    .footer {
+      padding: 22px 42px 30px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      font-size: 10px;
+      color: #9b978e;
+    }
+
+
+    /* =========================================
+       모바일
+    ========================================= */
+
+    @media (max-width: 900px) {
+      .header {
+        padding: 22px 22px;
+      }
+
+      .header-label {
+        display: none;
+      }
+
+      .main {
+        padding: 58px 22px 45px;
+
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .intro {
+        max-width: 620px;
+      }
+
+      .intro h1 {
+        font-size: clamp(40px, 11vw, 60px);
+      }
+
+      .memory-card {
+        padding: 26px 20px;
+        border-radius: 20px;
+      }
+
+      .submit-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #startButton {
+        width: 100%;
+      }
+
+      .privacy-note {
+        max-width: none;
+        order: 2;
+      }
+
+      .footer {
+        padding: 20px 22px 28px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="page">
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="header">
+
+      <div class="brand">
+        <div class="logo-mark"></div>
+        <div class="brand-name">기억결</div>
+      </div>
+
+      <div class="header-label">
+        Recall First · Memory Reconstruction
+      </div>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <main class="main">
+
+      <!-- 왼쪽 -->
+
+      <section class="intro">
+
+        <div class="eyebrow">
+          Recall First
+        </div>
+
+        <h1>
+          기억을 채우지 않고,<br />
+          <span>기억의 결을 따라가요.</span>
+        </h1>
+
+        <p class="intro-copy">
+          기억결은 흐릿한 기억을 그럴듯하게 만들어내지 않아요.
+          당신이 확실히 기억하는 것과,
+          어렴풋이 떠오르는 것,
+          아직 기억나지 않는 것을 구분하면서
+          하나의 장면을 천천히 복원해요.
+        </p>
+
+        <div class="principles">
+          <span class="principle">확실한 기억</span>
+          <span class="principle">불확실한 기억</span>
+          <span class="principle">기억하지 못하는 것</span>
+        </div>
+
+      </section>
+
+
+      <!-- 오른쪽 입력 -->
+
+      <section class="memory-card">
+
+        <div class="card-number">
+          01 · FIRST RECALL
+        </div>
+
+        <h2>
+          가장 먼저 떠오르는 기억을 적어주세요.
+        </h2>
+
+        <p class="card-description">
+          정확하지 않아도 괜찮아요.
+          생각나는 만큼만 적어주세요.
+          AI가 먼저 빈칸을 채우지 않아요.
+        </p>
+
+        <form id="memoryForm">
+
+          <div class="memory-input-wrap">
+
+            <textarea
+              id="memoryInput"
+              maxlength="1500"
+              autocomplete="off"
+              placeholder="예) 초등학생 때 여름에 할머니 집에 갔던 기억이 있어. 마당에서 사촌이랑 놀았는데 정확히 몇 년인지는 잘 모르겠어."
+            ></textarea>
+
+            <div class="character-count">
+              <span id="characterCount">0</span> / 1500
+            </div>
+
+          </div>
+
+
+          <div class="memory-hint">
+            <span class="hint-dot"></span>
+
+            <span>
+              날짜, 사람, 장소가 정확하지 않아도 괜찮아요.
+              “~였던 것 같아”, “잘 기억나지 않아” 같은 표현도
+              그대로 적어주세요.
+            </span>
+          </div>
+
+
+          <div class="submit-row">
+
+            <p class="privacy-note">
+              입력한 기억은 재구성 인터뷰를 시작하기 위한
+              최초 기억으로 사용돼요.
+            </p>
+
+            <button
+              id="startButton"
+              type="submit"
+            >
+              기억 따라가기 →
+            </button>
+
+          </div>
+
+
+          <div
+            id="statusMessage"
+            aria-live="polite"
+          ></div>
+
+        </form>
+
+      </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+      <span>
+        MEMORY GYEOL · 기억 재구성 프로젝트
+      </span>
+
+      <span>
+        기억하지 못하는 것은 기억하지 못하는 채로.
+      </span>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
+  <script>
+
+    /*
+      기억결 n8n Production Webhook
+
+      중요:
+      OpenAI API Key
+      Supabase Secret
+      n8n Credential
+
+      같은 비밀정보는 프론트 코드에 절대 넣지 않음.
+    */
+
+    const MEMORY_START_WEBHOOK =
+      "https://soykim0516.app.n8n.cloud/webhook/memory-start";
+
+
+    const form =
+      document.getElementById("memoryForm");
+
+    const memoryInput =
+      document.getElementById("memoryInput");
+
+    const startButton =
+      document.getElementById("startButton");
+
+    const statusMessage =
+      document.getElementById("statusMessage");
+
+    const characterCount =
+      document.getElementById("characterCount");
+
+
+    /* -------------------------------------
+       글자 수
+    ------------------------------------- */
+
+    memoryInput.addEventListener(
+      "input",
+      () => {
+
+        characterCount.textContent =
+          memoryInput.value.length;
+
+      }
+    );
+
+
+    /* -------------------------------------
+       상태 메시지
+    ------------------------------------- */
+
+    function setStatus(message, isError = false) {
+
+      statusMessage.textContent = message;
+
+      statusMessage.classList.toggle(
+        "error",
+        isError
+      );
+
+    }
+
+
+    /* -------------------------------------
+       최초 기억 전송
+    ------------------------------------- */
+
+    form.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const originalRecall =
+          memoryInput.value.trim();
+
+
+        /* 입력 검사 */
+
+        if (!originalRecall) {
+
+          setStatus(
+            "떠오르는 기억을 먼저 적어주세요.",
+            true
+          );
+
+          memoryInput.focus();
+
+          return;
+
+        }
+
+
+        /* 너무 짧은 입력 방지 */
+
+        if (originalRecall.length < 5) {
+
+          setStatus(
+            "조금만 더 기억을 적어주세요.",
+            true
+          );
+
+          memoryInput.focus();
+
+          return;
+
+        }
+
+
+        /* 로딩 상태 */
+
+        startButton.disabled = true;
+
+        startButton.textContent =
+          "기억을 정리하는 중…";
+
+        setStatus(
+          "처음 떠올린 기억을 그대로 보존하고 있어요."
+        );
+
+
+        try {
+
+          const response =
+            await fetch(
+              MEMORY_START_WEBHOOK,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                  original_recall:
+                    originalRecall
+                })
+              }
+            );
+
+
+          /* 서버 오류 */
+
+          if (!response.ok) {
+
+            throw new Error(
+              `HTTP ${response.status}`
+            );
+
+          }
+
+
+          const memoryData =
+            await response.json();
+
+
+          /* memory_id 확인 */
+
+          if (!memoryData.id) {
+
+            throw new Error(
+              "memory_id가 응답에 없습니다."
+            );
+
+          }
+
+
+          /*
+            인터뷰 페이지에서 사용할 데이터를
+            브라우저 sessionStorage에 저장.
+
+            브라우저를 닫으면 사라지는 임시 저장소라
+            초기 개발 단계에서 사용하기 좋음.
+          */
+
+          sessionStorage.setItem(
+            "memoryGyeolMemoryId",
+            String(memoryData.id)
+          );
+
+
+          sessionStorage.setItem(
+            "memoryGyeolOriginalRecall",
+            originalRecall
+          );
+
+
+          sessionStorage.setItem(
+            "memoryGyeolMemory",
+            JSON.stringify(memoryData)
+          );
+
+
+          /* 첫 AI 질문 */
+
+          if (
+            Array.isArray(memoryData.questions) &&
+            memoryData.questions.length > 0
+          ) {
+
+            sessionStorage.setItem(
+              "memoryGyeolCurrentQuestion",
+              memoryData.questions[0]
+            );
+
+          }
+
+
+          setStatus(
+            "기억이 저장됐어요. 인터뷰를 시작할게요."
+          );
+
+
+          /*
+            다음 단계
+
+            아직 interview.html을 만들지 않았기 때문에
+            지금 버튼을 실제로 눌러 테스트하면
+            다음 페이지가 없어서 404가 나올 수 있음.
+
+            interview.html을 만든 뒤 정상 동작함.
+          */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "./interview.html";
+
+            },
+            500
+          );
+
+        }
+
+        catch (error) {
+
+          console.error(
+            "memory-start error:",
+            error
+          );
+
+
+          setStatus(
+            "기억을 저장하지 못했어요. 잠시 후 다시 시도해주세요.",
+            true
+          );
+
+
+          startButton.disabled =
+            false;
+
+          startButton.textContent =
+            "기억 따라가기 →";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
