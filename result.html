@@ -11,7 +11,6 @@
   <title>기억결 — 재구성된 기억</title>
 
   <style>
-
     /* =========================================================
        RESET
     ========================================================= */
@@ -22,34 +21,45 @@
       padding: 0;
     }
 
-
     :root {
       --bg: #f4f1eb;
+      --bg-soft: #ece7dd;
 
       --paper:
         rgba(255, 255, 255, 0.72);
 
-      --text: #20201d;
+      --paper-solid:
+        #fbfaf7;
 
-      --sub: #77746d;
+      --text:
+        #20201d;
+
+      --sub:
+        #77746d;
+
+      --faint:
+        #99958e;
 
       --line:
         rgba(32, 32, 29, 0.13);
 
-      --accent: #31372f;
+      --accent:
+        #31372f;
 
-      --accent-soft: #dfe3da;
+      --uncertain:
+        #8c7b66;
 
-      --uncertain: #8c7b66;
+      --danger:
+        #a35151;
 
-      --danger: #a35151;
+      --shadow:
+        0 28px 70px
+        rgba(49, 49, 42, 0.07);
     }
-
 
     html {
       scroll-behavior: smooth;
     }
-
 
     body {
       min-height: 100vh;
@@ -78,11 +88,19 @@
         var(--bg);
     }
 
-
     button {
       font: inherit;
     }
 
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    /* =========================================================
+       PAGE
+    ========================================================= */
 
     .page {
       min-height: 100vh;
@@ -90,7 +108,6 @@
       display: flex;
       flex-direction: column;
     }
-
 
 
     /* =========================================================
@@ -108,14 +125,12 @@
         1px solid var(--line);
     }
 
-
     .brand {
       display: flex;
       align-items: center;
 
       gap: 12px;
     }
-
 
     .logo-mark {
       width: 30px;
@@ -129,7 +144,6 @@
 
       border-radius: 50%;
     }
-
 
     .logo-mark::before {
       content: "";
@@ -149,7 +163,6 @@
       opacity: 0.78;
     }
 
-
     .logo-mark::after {
       content: "";
 
@@ -167,7 +180,6 @@
       border-radius: 50%;
     }
 
-
     .brand-name {
       font-family:
         Georgia,
@@ -176,10 +188,8 @@
         serif;
 
       font-size: 21px;
-
       font-weight: 500;
     }
-
 
     .header-label {
       font-size: 11px;
@@ -190,7 +200,6 @@
 
       text-transform: uppercase;
     }
-
 
 
     /* =========================================================
@@ -211,7 +220,6 @@
     }
 
 
-
     /* =========================================================
        HEADING
     ========================================================= */
@@ -222,12 +230,10 @@
       display: flex;
 
       align-items: flex-end;
-
       justify-content: space-between;
 
       gap: 30px;
     }
-
 
     .eyebrow {
       margin-bottom: 13px;
@@ -240,7 +246,6 @@
 
       text-transform: uppercase;
     }
-
 
     .result-heading h1 {
       font-family:
@@ -261,21 +266,53 @@
       line-height: 1.17;
 
       letter-spacing: -0.045em;
+
+      word-break: keep-all;
     }
 
-
     .heading-copy {
-      max-width: 330px;
+      max-width: 340px;
 
       font-size: 12px;
 
-      line-height: 1.75;
+      line-height: 1.8;
 
       color: var(--sub);
 
       word-break: keep-all;
     }
 
+
+    /* =========================================================
+       ERROR
+    ========================================================= */
+
+    .error-box {
+      display: none;
+
+      margin-bottom: 24px;
+
+      padding: 17px 19px;
+
+      border:
+        1px solid
+        rgba(163, 81, 81, 0.25);
+
+      border-radius: 14px;
+
+      color: var(--danger);
+
+      background:
+        rgba(163, 81, 81, 0.05);
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+    .error-box.visible {
+      display: block;
+    }
 
 
     /* =========================================================
@@ -292,7 +329,6 @@
 
       align-items: start;
     }
-
 
 
     /* =========================================================
@@ -316,15 +352,8 @@
         );
 
       box-shadow:
-        0 28px 70px
-        rgba(
-          49,
-          49,
-          42,
-          0.07
-        );
+        var(--shadow);
     }
-
 
     .image-stage {
       width: 100%;
@@ -333,32 +362,15 @@
 
       position: relative;
 
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
       overflow: hidden;
 
       background:
         linear-gradient(
           135deg,
-          rgba(
-            222,
-            220,
-            211,
-            0.72
-          ),
-          rgba(
-            237,
-            235,
-            228,
-            0.5
-          )
+          rgba(222, 220, 211, 0.72),
+          rgba(237, 235, 228, 0.5)
         );
     }
-
 
     #memoryImage {
       width: 100%;
@@ -367,64 +379,56 @@
       object-fit: cover;
 
       display: none;
+
+      opacity: 0;
+
+      transition:
+        opacity 0.4s ease;
+    }
+
+    #memoryImage.visible {
+      display: block;
+
+      opacity: 1;
     }
 
 
-
     /* =========================================================
-       IMAGE PLACEHOLDER
+       IMAGE LOADING
     ========================================================= */
 
-    .image-placeholder {
-      max-width: 420px;
+    .image-loading {
+      position: absolute;
+      inset: 0;
 
-      padding: 38px;
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 18px;
+
+      padding: 40px;
 
       text-align: center;
     }
 
-
-    .placeholder-mark {
-      width: 64px;
-      height: 64px;
-
-      margin:
-        0 auto 20px;
+    .loading-mark {
+      width: 56px;
+      height: 56px;
 
       position: relative;
 
       border:
         1px solid
-        rgba(32, 32, 29, 0.2);
+        rgba(32, 32, 29, 0.16);
 
       border-radius: 50%;
     }
 
-
-    .placeholder-mark::before {
-      content: "";
-
-      position: absolute;
-
-      width: 20px;
-      height: 20px;
-
-      left: 10px;
-      top: 10px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(
-          49,
-          55,
-          47,
-          0.75
-        );
-    }
-
-
-    .placeholder-mark::after {
+    .loading-mark::before {
       content: "";
 
       position: absolute;
@@ -432,95 +436,211 @@
       width: 17px;
       height: 17px;
 
+      top: 9px;
+      left: 9px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(49, 55, 47, 0.72);
+    }
+
+    .loading-mark::after {
+      content: "";
+
+      position: absolute;
+
+      width: 14px;
+      height: 14px;
+
       right: 8px;
       bottom: 8px;
 
       border:
         1px solid
-        rgba(
-          49,
-          55,
-          47,
-          0.8
-        );
+        rgba(49, 55, 47, 0.75);
 
       border-radius: 50%;
+
+      animation:
+        pulse 1.4s ease-in-out infinite;
     }
 
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: scale(0.88);
+      }
 
-    .image-placeholder h2 {
-      margin-bottom: 10px;
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
 
+    .loading-title {
       font-family:
         Georgia,
         "Times New Roman",
         "Noto Serif KR",
         serif;
 
-      font-size: 22px;
+      font-size: 20px;
 
       font-weight: 400;
     }
 
+    .loading-copy {
+      max-width: 290px;
 
-    .image-placeholder p {
+      color: var(--sub);
+
       font-size: 12px;
 
       line-height: 1.75;
-
-      color: var(--sub);
 
       word-break: keep-all;
     }
 
 
-
     /* =========================================================
-       IMAGE INFO
+       IMAGE ERROR
     ========================================================= */
 
-    .image-info {
+    .image-error {
+      position: absolute;
+      inset: 0;
+
+      display: none;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 15px;
+
+      padding: 40px;
+
+      text-align: center;
+
+      background:
+        rgba(244, 241, 235, 0.96);
+    }
+
+    .image-error.visible {
+      display: flex;
+    }
+
+    .error-mark {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid
+        rgba(32, 32, 29, 0.17);
+
+      border-radius: 50%;
+
+      color: var(--sub);
+
+      font-size: 19px;
+    }
+
+    .image-error h2 {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: 20px;
+
+      font-weight: 400;
+    }
+
+    .image-error p {
+      max-width: 280px;
+
+      color: var(--sub);
+
+      font-size: 12px;
+
+      line-height: 1.7;
+
+      word-break: keep-all;
+    }
+
+    .retry-button {
+      margin-top: 4px;
+
+      padding: 11px 17px;
+
+      border:
+        1px solid var(--accent);
+
+      border-radius: 999px;
+
+      color: #f7f6f2;
+
+      background: var(--accent);
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      transition:
+        transform 0.18s ease,
+        opacity 0.18s ease;
+    }
+
+    .retry-button:hover {
+      transform:
+        translateY(-1px);
+
+      opacity: 0.92;
+    }
+
+
+    /* =========================================================
+       IMAGE CAPTION
+    ========================================================= */
+
+    .image-caption {
       padding: 18px 21px;
 
       display: flex;
 
       align-items: center;
-
       justify-content: space-between;
 
-      gap: 15px;
+      gap: 20px;
 
       border-top:
         1px solid var(--line);
+    }
 
+    .image-caption-title {
+      font-size: 11px;
+
+      color: #6f6b64;
+
+      font-weight: 600;
+
+      letter-spacing: 0.08em;
+    }
+
+    .image-caption-copy {
       font-size: 10px;
 
-      color: #918d84;
+      color: #9a968e;
+
+      text-align: right;
     }
-
-
-    #imagePathText {
-      max-width: 70%;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
-
-      white-space: nowrap;
-    }
-
-
-    .private-label {
-      padding: 5px 9px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 999px;
-
-      white-space: nowrap;
-    }
-
 
 
     /* =========================================================
@@ -535,7 +655,6 @@
       gap: 16px;
     }
 
-
     .panel {
       padding: 26px;
 
@@ -549,7 +668,6 @@
       backdrop-filter:
         blur(12px);
     }
-
 
     .panel-label {
       margin-bottom: 16px;
@@ -569,7 +687,6 @@
       text-transform: uppercase;
     }
 
-
     .panel-label::before {
       content: "";
 
@@ -581,13 +698,11 @@
       background: var(--accent);
     }
 
-
     .panel.uncertain
     .panel-label::before {
       background:
         var(--uncertain);
     }
-
 
 
     /* =========================================================
@@ -604,7 +719,6 @@
       gap: 11px;
     }
 
-
     .memory-list li {
       position: relative;
 
@@ -619,14 +733,12 @@
       word-break: keep-all;
     }
 
-
     .memory-list li::before {
       content: "";
 
       position: absolute;
 
       left: 0;
-
       top: 8px;
 
       width: 5px;
@@ -643,12 +755,10 @@
         );
     }
 
-
     .uncertain
     .memory-list li {
       color: #776d61;
     }
-
 
     .uncertain
     .memory-list li::before {
@@ -659,15 +769,15 @@
         transparent;
     }
 
-
     .empty-message {
+      display: none;
+
       font-size: 12px;
 
       line-height: 1.65;
 
       color: #99958e;
     }
-
 
 
     /* =========================================================
@@ -686,7 +796,6 @@
         1px solid var(--line);
     }
 
-
     .summary-label {
       margin-bottom: 14px;
 
@@ -695,10 +804,13 @@
       color: #969289;
 
       letter-spacing: 0.12em;
+
+      text-transform: uppercase;
     }
 
-
     #reconstructionPrompt {
+      max-width: 900px;
+
       font-size: 13px;
 
       line-height: 1.85;
@@ -707,7 +819,6 @@
 
       word-break: keep-all;
     }
-
 
 
     /* =========================================================
@@ -721,27 +832,16 @@
 
       align-items: center;
 
-      justify-content: space-between;
+      justify-content: flex-end;
 
       gap: 16px;
     }
-
-
-    .result-meta {
-      font-size: 10px;
-
-      line-height: 1.6;
-
-      color: #97938b;
-    }
-
 
     .action-buttons {
       display: flex;
 
       gap: 9px;
     }
-
 
     .button {
       padding: 13px 19px;
@@ -757,12 +857,10 @@
         opacity 0.18s ease;
     }
 
-
     .button:hover {
       transform:
         translateY(-1px);
     }
-
 
     .button.secondary {
       border:
@@ -779,7 +877,6 @@
         );
     }
 
-
     .button.primary {
       border:
         1px solid var(--accent);
@@ -788,51 +885,6 @@
 
       background: var(--accent);
     }
-
-
-
-    /* =========================================================
-       ERROR
-    ========================================================= */
-
-    .error-box {
-      display: none;
-
-      margin-bottom: 22px;
-
-      padding: 16px 18px;
-
-      border:
-        1px solid
-        rgba(
-          163,
-          81,
-          81,
-          0.25
-        );
-
-      border-radius: 13px;
-
-      color: var(--danger);
-
-      background:
-        rgba(
-          163,
-          81,
-          81,
-          0.05
-        );
-
-      font-size: 12px;
-
-      line-height: 1.7;
-    }
-
-
-    .error-box.visible {
-      display: block;
-    }
-
 
 
     /* =========================================================
@@ -856,7 +908,6 @@
     }
 
 
-
     /* =========================================================
        MOBILE
     ========================================================= */
@@ -868,17 +919,14 @@
           21px 20px;
       }
 
-
       .header-label {
         display: none;
       }
-
 
       .main {
         padding:
           48px 20px 50px;
       }
-
 
       .result-heading {
         align-items:
@@ -886,39 +934,49 @@
 
         flex-direction:
           column;
+
+        margin-bottom: 34px;
       }
 
+      .heading-copy {
+        max-width: 100%;
+      }
 
       .result-grid {
         grid-template-columns:
           1fr;
       }
 
-
       .image-card {
         border-radius:
           20px;
       }
 
-
-      .actions {
-        flex-direction:
-          column;
-
-        align-items:
-          stretch;
+      .panel {
+        padding:
+          22px;
       }
 
+      .summary-panel {
+        padding:
+          24px 4px;
+      }
+
+      .actions {
+        align-items:
+          stretch;
+
+        flex-direction:
+          column;
+      }
 
       .action-buttons {
         width: 100%;
       }
 
-
       .button {
         flex: 1;
       }
-
 
       .footer {
         padding: 20px;
@@ -926,9 +984,47 @@
         flex-direction:
           column;
       }
-
     }
 
+
+    @media (max-width: 520px) {
+
+      .result-heading h1 {
+        font-size:
+          38px;
+      }
+
+      .main {
+        padding-left:
+          16px;
+
+        padding-right:
+          16px;
+      }
+
+      .image-caption {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap: 6px;
+      }
+
+      .image-caption-copy {
+        text-align: left;
+      }
+
+      .action-buttons {
+        flex-direction:
+          column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -956,7 +1052,7 @@
 
 
     <div class="header-label">
-      Reconstructed Memory
+      Recall First
     </div>
 
   </header>
@@ -1039,46 +1135,75 @@
           />
 
 
+          <!-- 이미지 로딩 -->
+
           <div
-            id="imagePlaceholder"
-            class="image-placeholder"
+            id="imageLoading"
+            class="image-loading"
           >
 
+            <div class="loading-mark"></div>
 
-            <div class="placeholder-mark"></div>
+            <div class="loading-title">
+              기억의 장면을 불러오고 있어요.
+            </div>
 
-
-            <h2>
-              기억 이미지를 불러오고 있어요.
-            </h2>
-
-
-            <p id="placeholderText">
-
-              비공개 저장소에 보관된 이미지를
-              안전한 임시 주소로 불러오는 중이에요.
-
+            <p class="loading-copy">
+              기억의 경계를 지키면서
+              재구성된 이미지를 연결하고 있어요.
             </p>
-
 
           </div>
 
+
+          <!-- 이미지 오류 -->
+
+          <div
+            id="imageError"
+            class="image-error"
+          >
+
+            <div class="error-mark">
+              ↻
+            </div>
+
+            <h2>
+              이미지를 불러오지 못했어요.
+            </h2>
+
+            <p>
+              잠시 후 다시 시도해주세요.
+              기억 데이터는 그대로 남아 있어요.
+            </p>
+
+            <button
+              id="retryImageButton"
+              class="retry-button"
+              type="button"
+            >
+              이미지 다시 불러오기
+            </button>
+
+          </div>
+
+
         </div>
 
 
 
-        <div class="image-info">
+        <div class="image-caption">
 
-          <span id="imagePathText">
-            PRIVATE IMAGE
+          <span class="image-caption-title">
+            재구성된 기억
           </span>
 
 
-          <span class="private-label">
-            PRIVATE STORAGE
+          <span class="image-caption-copy">
+            기억한 것과 기억하지 못한 것의 경계를 지켜 만들었어요.
           </span>
 
         </div>
+
 
       </article>
 
@@ -1155,14 +1280,12 @@
     <section class="summary-panel">
 
       <div class="summary-label">
-        RECONSTRUCTION NOTE
+        Reconstruction Note
       </div>
 
 
       <p id="reconstructionPrompt">
-
         재구성 정보를 불러오는 중…
-
       </p>
 
     </section>
@@ -1174,33 +1297,6 @@
     ================================================== -->
 
     <section class="actions">
-
-
-      <div class="result-meta">
-
-        <div>
-
-          Reconstruction ID:
-
-          <span id="reconstructionId">
-            -
-          </span>
-
-        </div>
-
-
-        <div>
-
-          Memory ID:
-
-          <span id="memoryId">
-            -
-          </span>
-
-        </div>
-
-      </div>
-
 
 
       <div class="action-buttons">
@@ -1225,6 +1321,7 @@
 
 
       </div>
+
 
     </section>
 
@@ -1260,26 +1357,9 @@
      API SETTINGS
   ========================================================= */
 
-
-  /*
-    Private Supabase Storage 이미지의
-    Signed URL을 받아오는 n8n Production Webhook
-  */
-
   const MEMORY_IMAGE_URL_WEBHOOK =
     "https://soykim0516.app.n8n.cloud/webhook/memory-image-url";
 
-
-  /*
-    Supabase Storage의 기본 주소
-
-    n8n에서 반환되는 signedURL이
-
-    /object/sign/...
-
-    형태의 상대 경로이기 때문에
-    이 주소와 합쳐서 실제 이미지 URL을 만든다.
-  */
 
   const SUPABASE_STORAGE_BASE =
     "https://bqnipulfcbbxbksfppyc.supabase.co/storage/v1";
@@ -1315,6 +1395,9 @@
 
 
   let result = null;
+
+  let currentReconstructionId =
+    null;
 
 
 
@@ -1352,39 +1435,27 @@
     );
 
 
-  const reconstructionIdElement =
-    document.getElementById(
-      "reconstructionId"
-    );
-
-
-  const memoryIdElement =
-    document.getElementById(
-      "memoryId"
-    );
-
-
-  const imagePathText =
-    document.getElementById(
-      "imagePathText"
-    );
-
-
   const memoryImage =
     document.getElementById(
       "memoryImage"
     );
 
 
-  const imagePlaceholder =
+  const imageLoading =
     document.getElementById(
-      "imagePlaceholder"
+      "imageLoading"
     );
 
 
-  const placeholderText =
+  const imageError =
     document.getElementById(
-      "placeholderText"
+      "imageError"
+    );
+
+
+  const retryImageButton =
+    document.getElementById(
+      "retryImageButton"
     );
 
 
@@ -1426,6 +1497,15 @@
   }
 
 
+  function hideError() {
+
+    errorBox.classList.remove(
+      "visible"
+    );
+
+  }
+
+
 
   /* =========================================================
      MEMORY LIST
@@ -1436,7 +1516,6 @@
     emptyElement,
     items
   ) {
-
 
     target.innerHTML =
       "";
@@ -1450,9 +1529,7 @@
       emptyElement.style.display =
         "block";
 
-
       return;
-
     }
 
 
@@ -1462,7 +1539,6 @@
 
     items.forEach(
       (item) => {
-
 
         const li =
           document.createElement(
@@ -1478,6 +1554,80 @@
           li
         );
 
+      }
+    );
+
+  }
+
+
+
+  /* =========================================================
+     IMAGE UI
+  ========================================================= */
+
+  function showImageLoading() {
+
+    memoryImage.classList.remove(
+      "visible"
+    );
+
+    memoryImage.style.display =
+      "none";
+
+
+    imageError.classList.remove(
+      "visible"
+    );
+
+
+    imageLoading.style.display =
+      "flex";
+
+  }
+
+
+  function showImageError() {
+
+    memoryImage.classList.remove(
+      "visible"
+    );
+
+    memoryImage.style.display =
+      "none";
+
+
+    imageLoading.style.display =
+      "none";
+
+
+    imageError.classList.add(
+      "visible"
+    );
+
+  }
+
+
+  function showMemoryImage() {
+
+    imageLoading.style.display =
+      "none";
+
+
+    imageError.classList.remove(
+      "visible"
+    );
+
+
+    memoryImage.style.display =
+      "block";
+
+
+    requestAnimationFrame(
+      () => {
+
+        memoryImage.classList.add(
+          "visible"
+        );
 
       }
     );
@@ -1494,48 +1644,18 @@
     reconstructionId
   ) {
 
-
-    /*
-      reconstruction id 없음
-    */
-
     if (!reconstructionId) {
 
-
-      imagePathText.textContent =
-        "재구성 ID 없음";
-
-
-      placeholderText.textContent =
-        "이미지에 연결할 재구성 정보를 찾지 못했어요.";
-
+      showImageError();
 
       return;
-
     }
 
 
+    showImageLoading();
+
+
     try {
-
-
-      imagePathText.textContent =
-        "비공개 이미지 확인 중…";
-
-
-      placeholderText.textContent =
-        "비공개 저장소의 이미지를 안전하게 불러오는 중이에요.";
-
-
-
-      /*
-        n8n Webhook 호출
-
-        예:
-
-        {
-          reconstruction_id: 4
-        }
-      */
 
       const response =
         await fetch(
@@ -1568,11 +1688,6 @@
         );
 
 
-
-      /*
-        HTTP 오류
-      */
-
       if (!response.ok) {
 
         throw new Error(
@@ -1582,19 +1697,8 @@
       }
 
 
-
-      /*
-        n8n 응답
-
-        {
-          signedURL:
-          "/object/sign/memory-images/..."
-        }
-      */
-
       const data =
         await response.json();
-
 
 
       if (!data.signedURL) {
@@ -1606,12 +1710,8 @@
       }
 
 
-
-      /*
-        Signed URL 완성
-      */
-
       const fullImageUrl =
+
         data.signedURL.startsWith(
           "http"
         )
@@ -1623,62 +1723,21 @@
             data.signedURL;
 
 
-
-      /*
-        이미지 로딩 성공 처리
-      */
-
       memoryImage.onload =
         () => {
 
-
-          memoryImage.style.display =
-            "block";
-
-
-          imagePlaceholder.style.display =
-            "none";
-
-
-          imagePathText.textContent =
-            "SIGNED PRIVATE IMAGE";
-
+          showMemoryImage();
 
         };
 
-
-
-      /*
-        이미지 실제 로딩 실패
-      */
 
       memoryImage.onerror =
         () => {
 
-
-          memoryImage.style.display =
-            "none";
-
-
-          imagePlaceholder.style.display =
-            "block";
-
-
-          placeholderText.textContent =
-            "이미지를 불러오지 못했어요. 임시 접근 주소를 다시 만들어주세요.";
-
-
-          imagePathText.textContent =
-            "이미지 로드 실패";
-
+          showImageError();
 
         };
 
-
-
-      /*
-        실제 이미지 주소 적용
-      */
 
       memoryImage.src =
         fullImageUrl;
@@ -1689,28 +1748,13 @@
 
     catch (error) {
 
-
       console.error(
         "signed image error:",
         error
       );
 
 
-      memoryImage.style.display =
-        "none";
-
-
-      imagePlaceholder.style.display =
-        "block";
-
-
-      placeholderText.textContent =
-        "비공개 이미지를 불러오는 중 문제가 생겼어요.";
-
-
-      imagePathText.textContent =
-        "이미지 로드 실패";
-
+      showImageError();
 
     }
 
@@ -1724,13 +1768,10 @@
 
   async function initializeResultPage() {
 
+    hideError();
 
-    /*
-      인터뷰 결과가 없음
-    */
 
     if (!storedResult) {
-
 
       showError(
         "재구성 결과를 찾지 못했어요. 처음부터 기억을 다시 시작해주세요."
@@ -1741,18 +1782,14 @@
         "재구성 결과가 없어요.";
 
 
-      return;
+      showImageError();
 
+
+      return;
     }
 
 
-
     try {
-
-
-      /*
-        sessionStorage JSON 파싱
-      */
 
       result =
         JSON.parse(
@@ -1760,10 +1797,7 @@
         );
 
 
-
-      /*
-        확실한 기억
-      */
+      /* 확실한 기억 */
 
       renderList(
         confirmedList,
@@ -1772,10 +1806,7 @@
       );
 
 
-
-      /*
-        불확실한 기억
-      */
+      /* 불확실한 기억 */
 
       renderList(
         uncertainList,
@@ -1784,24 +1815,18 @@
       );
 
 
-
-      /*
-        재구성 프롬프트
-      */
+      /* 재구성 설명 */
 
       reconstructionPrompt.textContent =
 
         result.reconstruction_prompt ||
 
-        "재구성 설명이 없어요.";
+        "확실한 기억과 불확실한 기억을 구분해 장면을 재구성했어요.";
 
 
+      /* reconstruction ID */
 
-      /*
-        reconstruction ID
-      */
-
-      const reconstructionId =
+      currentReconstructionId =
 
         result.id ??
 
@@ -1810,45 +1835,9 @@
         null;
 
 
-
-      reconstructionIdElement.textContent =
-
-        reconstructionId ??
-
-        "-";
-
-
-
       /*
-        Memory ID
-      */
-
-      const finalMemoryId =
-
-        result.memory_id ??
-
-        storedMemoryId ??
-
-        null;
-
-
-
-      memoryIdElement.textContent =
-
-        finalMemoryId ??
-
-        "-";
-
-
-
-      /*
-        DB에 저장된 Storage 경로 표시
-
-        예:
-
-        memory-images/reconstruction_4.png
-
-        실제 img 주소로 직접 쓰지는 않음.
+        image_url은 화면에 직접 표시하지 않지만
+        이전 구조와 호환되도록 값은 그대로 유지한다.
       */
 
       const storagePath =
@@ -1860,21 +1849,32 @@
         "";
 
 
-      if (storagePath) {
+      /*
+        memory ID 역시
+        내부 세션 호환을 위해 읽어 둔다.
+      */
 
-        imagePathText.textContent =
-          storagePath;
+      const finalMemoryId =
 
-      }
+        result.memory_id ??
 
+        storedMemoryId ??
+
+        null;
 
 
       /*
-        Private Storage Signed URL 요청
+        storagePath / finalMemoryId는
+        개발자용 화면 정보로 노출하지 않는다.
       */
 
+      void storagePath;
+
+      void finalMemoryId;
+
+
       await loadPrivateMemoryImage(
-        reconstructionId
+        currentReconstructionId
       );
 
 
@@ -1882,7 +1882,6 @@
 
 
     catch (error) {
-
 
       console.error(
         "result initialization error:",
@@ -1899,9 +1898,41 @@
         "결과 데이터를 표시하지 못했어요.";
 
 
+      showImageError();
+
     }
 
   }
+
+
+
+  /* =========================================================
+     RETRY IMAGE
+  ========================================================= */
+
+  retryImageButton.addEventListener(
+    "click",
+    async () => {
+
+      if (!currentReconstructionId) {
+
+        showError(
+          "이미지에 연결할 재구성 정보를 찾지 못했어요."
+        );
+
+        return;
+      }
+
+
+      hideError();
+
+
+      await loadPrivateMemoryImage(
+        currentReconstructionId
+      );
+
+    }
+  );
 
 
 
@@ -1912,7 +1943,6 @@
   restartButton.addEventListener(
     "click",
     () => {
-
 
       const confirmed =
         window.confirm(
@@ -1927,54 +1957,11 @@
       }
 
 
+      clearMemorySession();
 
-      /*
-        기억결 관련 sessionStorage 삭제
-      */
-
-      sessionStorage.removeItem(
-        "memoryGyeolMemoryId"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolOriginalRecall"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolCurrentQuestion"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolMemory"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolResult"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolReconstructionId"
-      );
-
-
-      sessionStorage.removeItem(
-        "memoryGyeolImagePath"
-      );
-
-
-
-      /*
-        첫 화면
-      */
 
       window.location.href =
         "./index.html";
-
 
     }
   );
@@ -1989,13 +1976,55 @@
     "click",
     () => {
 
-
       window.location.href =
         "./index.html";
 
-
     }
   );
+
+
+
+  /* =========================================================
+     CLEAR SESSION
+  ========================================================= */
+
+  function clearMemorySession() {
+
+    sessionStorage.removeItem(
+      "memoryGyeolMemoryId"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolOriginalRecall"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolCurrentQuestion"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolMemory"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolResult"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolReconstructionId"
+    );
+
+
+    sessionStorage.removeItem(
+      "memoryGyeolImagePath"
+    );
+
+  }
 
 
 
