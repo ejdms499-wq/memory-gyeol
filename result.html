@@ -2,32 +2,54 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>기억결 — 재구성된 기억</title>
 
   <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     :root {
       --bg: #f4f1eb;
-      --paper: rgba(255, 255, 255, 0.72);
+
+      --paper:
+        rgba(255, 255, 255, 0.72);
+
       --text: #20201d;
+
       --sub: #77746d;
-      --line: rgba(32, 32, 29, 0.13);
+
+      --line:
+        rgba(32, 32, 29, 0.13);
+
       --accent: #31372f;
+
       --accent-soft: #dfe3da;
+
       --uncertain: #8c7b66;
+
       --danger: #a35151;
     }
+
 
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       min-height: 100vh;
@@ -56,19 +78,24 @@
         var(--bg);
     }
 
+
     button {
       font: inherit;
     }
 
+
     .page {
       min-height: 100vh;
+
       display: flex;
       flex-direction: column;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        HEADER
-    ========================================= */
+    ========================================================= */
 
     .header {
       padding: 28px 42px;
@@ -77,24 +104,32 @@
       align-items: center;
       justify-content: space-between;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
     }
+
 
     .brand {
       display: flex;
       align-items: center;
+
       gap: 12px;
     }
+
 
     .logo-mark {
       width: 30px;
       height: 30px;
 
-      border: 1px solid rgba(32, 32, 29, 0.25);
-      border-radius: 50%;
-
       position: relative;
+
+      border:
+        1px solid
+        rgba(32, 32, 29, 0.25);
+
+      border-radius: 50%;
     }
+
 
     .logo-mark::before {
       content: "";
@@ -108,9 +143,12 @@
       top: 5px;
 
       border-radius: 50%;
+
       background: var(--accent);
+
       opacity: 0.78;
     }
+
 
     .logo-mark::after {
       content: "";
@@ -123,9 +161,12 @@
       right: 4px;
       bottom: 4px;
 
-      border: 1px solid var(--accent);
+      border:
+        1px solid var(--accent);
+
       border-radius: 50%;
     }
+
 
     .brand-name {
       font-family:
@@ -135,49 +176,71 @@
         serif;
 
       font-size: 21px;
+
       font-weight: 500;
     }
 
+
     .header-label {
       font-size: 11px;
+
       color: var(--sub);
 
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        MAIN
-    ========================================= */
+    ========================================================= */
 
     .main {
       width: 100%;
+
       max-width: 1180px;
 
       margin: 0 auto;
-      padding: 72px 36px 70px;
+
+      padding:
+        72px 36px 70px;
 
       flex: 1;
     }
+
+
+
+    /* =========================================================
+       HEADING
+    ========================================================= */
 
     .result-heading {
       margin-bottom: 44px;
 
       display: flex;
+
       align-items: flex-end;
+
       justify-content: space-between;
+
       gap: 30px;
     }
+
 
     .eyebrow {
       margin-bottom: 13px;
 
       font-size: 11px;
+
       color: var(--sub);
 
       letter-spacing: 0.14em;
+
       text-transform: uppercase;
     }
+
 
     .result-heading h1 {
       font-family:
@@ -186,59 +249,94 @@
         "Noto Serif KR",
         serif;
 
-      font-size: clamp(38px, 5vw, 60px);
+      font-size:
+        clamp(
+          38px,
+          5vw,
+          60px
+        );
+
       font-weight: 400;
 
       line-height: 1.17;
+
       letter-spacing: -0.045em;
     }
+
 
     .heading-copy {
       max-width: 330px;
 
       font-size: 12px;
+
       line-height: 1.75;
+
       color: var(--sub);
 
       word-break: keep-all;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        RESULT GRID
-    ========================================= */
+    ========================================================= */
 
     .result-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+
+      grid-template-columns:
+        1.1fr 0.9fr;
 
       gap: 28px;
+
       align-items: start;
     }
 
-    /* =========================================
-       IMAGE
-    ========================================= */
+
+
+    /* =========================================================
+       IMAGE CARD
+    ========================================================= */
 
     .image-card {
       overflow: hidden;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       border-radius: 24px;
 
-      background: rgba(255, 255, 255, 0.52);
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.52
+        );
 
       box-shadow:
-        0 28px 70px rgba(49, 49, 42, 0.07);
+        0 28px 70px
+        rgba(
+          49,
+          49,
+          42,
+          0.07
+        );
     }
+
 
     .image-stage {
       width: 100%;
+
       aspect-ratio: 1 / 1;
 
       position: relative;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       overflow: hidden;
@@ -246,10 +344,21 @@
       background:
         linear-gradient(
           135deg,
-          rgba(222, 220, 211, 0.72),
-          rgba(237, 235, 228, 0.5)
+          rgba(
+            222,
+            220,
+            211,
+            0.72
+          ),
+          rgba(
+            237,
+            235,
+            228,
+            0.5
+          )
         );
     }
+
 
     #memoryImage {
       width: 100%;
@@ -260,25 +369,37 @@
       display: none;
     }
 
+
+
+    /* =========================================================
+       IMAGE PLACEHOLDER
+    ========================================================= */
+
     .image-placeholder {
+      max-width: 420px;
+
       padding: 38px;
 
       text-align: center;
-
-      max-width: 400px;
     }
+
 
     .placeholder-mark {
       width: 64px;
       height: 64px;
 
-      margin: 0 auto 20px;
+      margin:
+        0 auto 20px;
 
       position: relative;
 
-      border: 1px solid rgba(32, 32, 29, 0.2);
+      border:
+        1px solid
+        rgba(32, 32, 29, 0.2);
+
       border-radius: 50%;
     }
+
 
     .placeholder-mark::before {
       content: "";
@@ -292,8 +413,16 @@
       top: 10px;
 
       border-radius: 50%;
-      background: rgba(49, 55, 47, 0.75);
+
+      background:
+        rgba(
+          49,
+          55,
+          47,
+          0.75
+        );
     }
+
 
     .placeholder-mark::after {
       content: "";
@@ -306,9 +435,18 @@
       right: 8px;
       bottom: 8px;
 
+      border:
+        1px solid
+        rgba(
+          49,
+          55,
+          47,
+          0.8
+        );
+
       border-radius: 50%;
-      border: 1px solid rgba(49, 55, 47, 0.8);
     }
+
 
     .image-placeholder h2 {
       margin-bottom: 10px;
@@ -320,81 +458,117 @@
         serif;
 
       font-size: 22px;
+
       font-weight: 400;
     }
 
+
     .image-placeholder p {
+      font-size: 12px;
+
+      line-height: 1.75;
+
       color: var(--sub);
 
-      font-size: 12px;
-      line-height: 1.75;
+      word-break: keep-all;
     }
+
+
+
+    /* =========================================================
+       IMAGE INFO
+    ========================================================= */
 
     .image-info {
       padding: 18px 21px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 15px;
 
-      border-top: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
 
       font-size: 10px;
+
       color: #918d84;
     }
+
 
     #imagePathText {
       max-width: 70%;
 
       overflow: hidden;
+
       text-overflow: ellipsis;
+
       white-space: nowrap;
     }
+
 
     .private-label {
       padding: 5px 9px;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       border-radius: 999px;
 
       white-space: nowrap;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        MEMORY PANEL
-    ========================================= */
+    ========================================================= */
 
     .memory-panel {
       display: flex;
+
       flex-direction: column;
+
       gap: 16px;
     }
+
 
     .panel {
       padding: 26px;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       border-radius: 19px;
 
       background: var(--paper);
 
-      backdrop-filter: blur(12px);
+      backdrop-filter:
+        blur(12px);
     }
+
 
     .panel-label {
       margin-bottom: 16px;
 
       display: flex;
+
       align-items: center;
+
       gap: 8px;
 
       font-size: 10px;
+
       color: var(--sub);
 
       letter-spacing: 0.11em;
+
       text-transform: uppercase;
     }
+
 
     .panel-label::before {
       content: "";
@@ -403,20 +577,33 @@
       height: 6px;
 
       border-radius: 50%;
+
       background: var(--accent);
     }
 
-    .panel.uncertain .panel-label::before {
-      background: var(--uncertain);
+
+    .panel.uncertain
+    .panel-label::before {
+      background:
+        var(--uncertain);
     }
+
+
+
+    /* =========================================================
+       MEMORY LIST
+    ========================================================= */
 
     .memory-list {
       list-style: none;
 
       display: flex;
+
       flex-direction: column;
+
       gap: 11px;
     }
+
 
     .memory-list li {
       position: relative;
@@ -424,6 +611,7 @@
       padding-left: 18px;
 
       font-size: 13px;
+
       line-height: 1.65;
 
       color: #57544e;
@@ -431,89 +619,129 @@
       word-break: keep-all;
     }
 
+
     .memory-list li::before {
       content: "";
 
       position: absolute;
 
       left: 0;
+
       top: 8px;
 
       width: 5px;
       height: 5px;
 
       border-radius: 50%;
-      background: rgba(49, 55, 47, 0.66);
+
+      background:
+        rgba(
+          49,
+          55,
+          47,
+          0.66
+        );
     }
 
-    .uncertain .memory-list li {
+
+    .uncertain
+    .memory-list li {
       color: #776d61;
     }
 
-    .uncertain .memory-list li::before {
-      border: 1px solid #94836e;
-      background: transparent;
+
+    .uncertain
+    .memory-list li::before {
+      border:
+        1px solid #94836e;
+
+      background:
+        transparent;
     }
+
 
     .empty-message {
       font-size: 12px;
+
       line-height: 1.65;
+
       color: #99958e;
     }
 
-    /* =========================================
-       PROMPT / SUMMARY
-    ========================================= */
+
+
+    /* =========================================================
+       SUMMARY
+    ========================================================= */
 
     .summary-panel {
       margin-top: 28px;
 
       padding: 28px;
 
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
     }
+
 
     .summary-label {
       margin-bottom: 14px;
 
       font-size: 10px;
+
       color: #969289;
 
       letter-spacing: 0.12em;
     }
 
+
     #reconstructionPrompt {
       font-size: 13px;
+
       line-height: 1.85;
+
       color: #69665f;
 
       word-break: keep-all;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        ACTIONS
-    ========================================= */
+    ========================================================= */
 
     .actions {
       margin-top: 32px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 16px;
     }
 
+
     .result-meta {
       font-size: 10px;
+
       line-height: 1.6;
+
       color: #97938b;
     }
 
+
     .action-buttons {
       display: flex;
+
       gap: 9px;
     }
+
 
     .button {
       padding: 13px 19px;
@@ -529,128 +757,203 @@
         opacity 0.18s ease;
     }
 
+
     .button:hover {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
     }
+
 
     .button.secondary {
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
 
       color: #69665f;
-      background: rgba(255, 255, 255, 0.35);
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.35
+        );
     }
 
+
     .button.primary {
-      border: 1px solid var(--accent);
+      border:
+        1px solid var(--accent);
 
       color: #f7f6f2;
+
       background: var(--accent);
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        ERROR
-    ========================================= */
+    ========================================================= */
 
     .error-box {
       display: none;
 
       margin-bottom: 22px;
+
       padding: 16px 18px;
 
-      border: 1px solid rgba(163, 81, 81, 0.25);
+      border:
+        1px solid
+        rgba(
+          163,
+          81,
+          81,
+          0.25
+        );
+
       border-radius: 13px;
 
       color: var(--danger);
-      background: rgba(163, 81, 81, 0.05);
+
+      background:
+        rgba(
+          163,
+          81,
+          81,
+          0.05
+        );
 
       font-size: 12px;
+
       line-height: 1.7;
     }
+
 
     .error-box.visible {
       display: block;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        FOOTER
-    ========================================= */
+    ========================================================= */
 
     .footer {
-      padding: 22px 42px 30px;
+      padding:
+        22px 42px 30px;
 
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 20px;
 
       font-size: 10px;
+
       color: #9b978e;
     }
 
-    /* =========================================
+
+
+    /* =========================================================
        MOBILE
-    ========================================= */
+    ========================================================= */
 
     @media (max-width: 850px) {
+
       .header {
-        padding: 21px 20px;
+        padding:
+          21px 20px;
       }
+
 
       .header-label {
         display: none;
       }
 
+
       .main {
-        padding: 48px 20px 50px;
+        padding:
+          48px 20px 50px;
       }
+
 
       .result-heading {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
       }
+
 
       .result-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
+
 
       .image-card {
-        border-radius: 20px;
+        border-radius:
+          20px;
       }
 
+
       .actions {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
       }
+
 
       .action-buttons {
         width: 100%;
       }
 
+
       .button {
         flex: 1;
       }
 
+
       .footer {
         padding: 20px;
-        flex-direction: column;
+
+        flex-direction:
+          column;
       }
+
     }
+
   </style>
 </head>
+
 
 <body>
 
 <div class="page">
 
-  <!-- =====================================
+
+  <!-- =====================================================
        HEADER
-  ====================================== -->
+  ====================================================== -->
 
   <header class="header">
 
     <div class="brand">
+
       <div class="logo-mark"></div>
-      <div class="brand-name">기억결</div>
+
+      <div class="brand-name">
+        기억결
+      </div>
+
     </div>
+
 
     <div class="header-label">
       Reconstructed Memory
@@ -659,34 +962,52 @@
   </header>
 
 
-  <!-- =====================================
+
+  <!-- =====================================================
        MAIN
-  ====================================== -->
+  ====================================================== -->
 
   <main class="main">
+
+
+    <!-- =================================================
+         TITLE
+    ================================================== -->
 
     <section class="result-heading">
 
       <div>
+
         <div class="eyebrow">
           03 · MEMORY RECONSTRUCTION
         </div>
+
 
         <h1>
           기억의 한 장면이<br />
           다시 이어졌어요.
         </h1>
+
       </div>
 
+
       <p class="heading-copy">
+
         확실히 기억하는 것은 선명하게,
         확실하지 않은 것은 확실하지 않은 채로 남겼어요.
+
         이 이미지는 기억의 정답이 아니라
         지금 떠올릴 수 있는 기억의 경계를 담은 재구성이에요.
+
       </p>
 
     </section>
 
+
+
+    <!-- =================================================
+         ERROR
+    ================================================== -->
 
     <div
       id="errorBox"
@@ -694,48 +1015,64 @@
     ></div>
 
 
+
+    <!-- =================================================
+         RESULT
+    ================================================== -->
+
     <section class="result-grid">
 
-      <!-- =================================
+
+      <!-- ===============================================
            IMAGE
-      ================================== -->
+      ================================================ -->
 
       <article class="image-card">
 
+
         <div class="image-stage">
+
 
           <img
             id="memoryImage"
             alt="재구성된 기억 이미지"
           />
 
+
           <div
             id="imagePlaceholder"
             class="image-placeholder"
           >
 
+
             <div class="placeholder-mark"></div>
 
+
             <h2>
-              재구성 이미지를 준비했어요.
+              기억 이미지를 불러오고 있어요.
             </h2>
 
+
             <p id="placeholderText">
-              현재 이미지는 비공개 저장소에 안전하게 보관돼 있어요.
-              다음 단계에서 안전한 임시 주소를 연결하면
-              이 영역에 실제 이미지가 표시돼요.
+
+              비공개 저장소에 보관된 이미지를
+              안전한 임시 주소로 불러오는 중이에요.
+
             </p>
+
 
           </div>
 
         </div>
 
 
+
         <div class="image-info">
 
           <span id="imagePathText">
-            IMAGE PATH
+            PRIVATE IMAGE
           </span>
+
 
           <span class="private-label">
             PRIVATE STORAGE
@@ -746,11 +1083,15 @@
       </article>
 
 
-      <!-- =================================
+
+      <!-- ===============================================
            MEMORY DATA
-      ================================== -->
+      ================================================ -->
 
       <aside class="memory-panel">
+
+
+        <!-- 확실한 기억 -->
 
         <section class="panel">
 
@@ -758,10 +1099,12 @@
             Confirmed Memory
           </div>
 
+
           <ul
             id="confirmedList"
             class="memory-list"
           ></ul>
+
 
           <p
             id="confirmedEmpty"
@@ -773,16 +1116,21 @@
         </section>
 
 
+
+        <!-- 불확실한 기억 -->
+
         <section class="panel uncertain">
 
           <div class="panel-label">
             Uncertain Memory
           </div>
 
+
           <ul
             id="uncertainList"
             class="memory-list"
           ></ul>
+
 
           <p
             id="uncertainEmpty"
@@ -793,14 +1141,16 @@
 
         </section>
 
+
       </aside>
 
     </section>
 
 
-    <!-- =====================================
-         RECONSTRUCTION DESCRIPTION
-    ====================================== -->
+
+    <!-- =================================================
+         RECONSTRUCTION NOTE
+    ================================================== -->
 
     <section class="summary-panel">
 
@@ -808,35 +1158,53 @@
         RECONSTRUCTION NOTE
       </div>
 
+
       <p id="reconstructionPrompt">
+
         재구성 정보를 불러오는 중…
+
       </p>
 
     </section>
 
 
-    <!-- =====================================
+
+    <!-- =================================================
          ACTIONS
-    ====================================== -->
+    ================================================== -->
 
     <section class="actions">
+
 
       <div class="result-meta">
 
         <div>
+
           Reconstruction ID:
-          <span id="reconstructionId">-</span>
+
+          <span id="reconstructionId">
+            -
+          </span>
+
         </div>
 
+
         <div>
+
           Memory ID:
-          <span id="memoryId">-</span>
+
+          <span id="memoryId">
+            -
+          </span>
+
         </div>
 
       </div>
 
 
+
       <div class="action-buttons">
+
 
         <button
           id="restartButton"
@@ -846,6 +1214,7 @@
           새로운 기억 시작
         </button>
 
+
         <button
           id="backButton"
           class="button primary"
@@ -854,16 +1223,19 @@
           처음 화면으로
         </button>
 
+
       </div>
 
     </section>
 
+
   </main>
 
 
-  <!-- =====================================
+
+  <!-- =====================================================
        FOOTER
-  ====================================== -->
+  ====================================================== -->
 
   <footer class="footer">
 
@@ -877,24 +1249,58 @@
 
   </footer>
 
+
 </div>
+
 
 
 <script>
 
-  /* ==========================================
-     RESULT DATA
-  ========================================== */
+  /* =========================================================
+     API SETTINGS
+  ========================================================= */
+
+
+  /*
+    Private Supabase Storage 이미지의
+    Signed URL을 받아오는 n8n Production Webhook
+  */
+
+  const MEMORY_IMAGE_URL_WEBHOOK =
+    "https://soykim0516.app.n8n.cloud/webhook/memory-image-url";
+
+
+  /*
+    Supabase Storage의 기본 주소
+
+    n8n에서 반환되는 signedURL이
+
+    /object/sign/...
+
+    형태의 상대 경로이기 때문에
+    이 주소와 합쳐서 실제 이미지 URL을 만든다.
+  */
+
+  const SUPABASE_STORAGE_BASE =
+    "https://bqnipulfcbbxbksfppyc.supabase.co/storage/v1";
+
+
+
+  /* =========================================================
+     SESSION STORAGE
+  ========================================================= */
 
   const storedResult =
     sessionStorage.getItem(
       "memoryGyeolResult"
     );
 
+
   const storedMemoryId =
     sessionStorage.getItem(
       "memoryGyeolMemoryId"
     );
+
 
   const storedImagePath =
     sessionStorage.getItem(
@@ -902,77 +1308,97 @@
     );
 
 
+  const storedReconstructionId =
+    sessionStorage.getItem(
+      "memoryGyeolReconstructionId"
+    );
+
+
   let result = null;
 
 
-  /* ==========================================
+
+  /* =========================================================
      DOM
-  ========================================== */
+  ========================================================= */
 
   const confirmedList =
     document.getElementById(
       "confirmedList"
     );
 
+
   const uncertainList =
     document.getElementById(
       "uncertainList"
     );
+
 
   const confirmedEmpty =
     document.getElementById(
       "confirmedEmpty"
     );
 
+
   const uncertainEmpty =
     document.getElementById(
       "uncertainEmpty"
     );
+
 
   const reconstructionPrompt =
     document.getElementById(
       "reconstructionPrompt"
     );
 
-  const reconstructionId =
+
+  const reconstructionIdElement =
     document.getElementById(
       "reconstructionId"
     );
 
-  const memoryId =
+
+  const memoryIdElement =
     document.getElementById(
       "memoryId"
     );
+
 
   const imagePathText =
     document.getElementById(
       "imagePathText"
     );
 
+
   const memoryImage =
     document.getElementById(
       "memoryImage"
     );
+
 
   const imagePlaceholder =
     document.getElementById(
       "imagePlaceholder"
     );
 
+
   const placeholderText =
     document.getElementById(
       "placeholderText"
     );
+
 
   const errorBox =
     document.getElementById(
       "errorBox"
     );
 
+
   const restartButton =
     document.getElementById(
       "restartButton"
     );
+
 
   const backButton =
     document.getElementById(
@@ -980,14 +1406,18 @@
     );
 
 
-  /* ==========================================
-     ERROR
-  ========================================== */
 
-  function showError(message) {
+  /* =========================================================
+     ERROR
+  ========================================================= */
+
+  function showError(
+    message
+  ) {
 
     errorBox.textContent =
       message;
+
 
     errorBox.classList.add(
       "visible"
@@ -996,9 +1426,10 @@
   }
 
 
-  /* ==========================================
-     LIST RENDER
-  ========================================== */
+
+  /* =========================================================
+     MEMORY LIST
+  ========================================================= */
 
   function renderList(
     target,
@@ -1006,7 +1437,9 @@
     items
   ) {
 
-    target.innerHTML = "";
+
+    target.innerHTML =
+      "";
 
 
     if (
@@ -1016,6 +1449,7 @@
 
       emptyElement.style.display =
         "block";
+
 
       return;
 
@@ -1029,17 +1463,21 @@
     items.forEach(
       (item) => {
 
+
         const li =
           document.createElement(
             "li"
           );
 
+
         li.textContent =
           item;
+
 
         target.appendChild(
           li
         );
+
 
       }
     );
@@ -1047,98 +1485,274 @@
   }
 
 
-  /* ==========================================
-     IMAGE
-  ========================================== */
 
-  function renderImage(
-    imageValue
+  /* =========================================================
+     PRIVATE IMAGE
+  ========================================================= */
+
+  async function loadPrivateMemoryImage(
+    reconstructionId
   ) {
 
-    if (!imageValue) {
+
+    /*
+      reconstruction id 없음
+    */
+
+    if (!reconstructionId) {
+
 
       imagePathText.textContent =
-        "이미지 경로 없음";
+        "재구성 ID 없음";
+
+
+      placeholderText.textContent =
+        "이미지에 연결할 재구성 정보를 찾지 못했어요.";
+
 
       return;
 
     }
 
 
-    imagePathText.textContent =
-      imageValue;
+    try {
 
 
-    /*
-      현재 Supabase memory-images 버킷은 PRIVATE.
-
-      그래서 DB에 저장된:
-
-      memory-images/reconstruction_4.png
-
-      같은 경로를 그대로 img.src에 넣으면
-      브라우저에서 접근할 수 없음.
-
-      만약 나중에 signed URL을 전달받아
-      imageValue가 https:// 로 시작한다면
-      자동으로 실제 이미지를 표시하도록 준비해둠.
-    */
+      imagePathText.textContent =
+        "비공개 이미지 확인 중…";
 
 
-    if (
-      imageValue.startsWith(
-        "https://"
-      ) ||
-      imageValue.startsWith(
-        "http://"
-      )
-    ) {
-
-      memoryImage.src =
-        imageValue;
-
-      memoryImage.style.display =
-        "block";
-
-      imagePlaceholder.style.display =
-        "none";
+      placeholderText.textContent =
+        "비공개 저장소의 이미지를 안전하게 불러오는 중이에요.";
 
 
-      memoryImage.addEventListener(
-        "error",
+
+      /*
+        n8n Webhook 호출
+
+        예:
+
+        {
+          reconstruction_id: 4
+        }
+      */
+
+      const response =
+        await fetch(
+          MEMORY_IMAGE_URL_WEBHOOK,
+          {
+
+            method:
+              "POST",
+
+
+            headers: {
+
+              "Content-Type":
+                "application/json"
+
+            },
+
+
+            body:
+              JSON.stringify({
+
+                reconstruction_id:
+                  Number(
+                    reconstructionId
+                  )
+
+              })
+
+          }
+        );
+
+
+
+      /*
+        HTTP 오류
+      */
+
+      if (!response.ok) {
+
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+
+      }
+
+
+
+      /*
+        n8n 응답
+
+        {
+          signedURL:
+          "/object/sign/memory-images/..."
+        }
+      */
+
+      const data =
+        await response.json();
+
+
+
+      if (!data.signedURL) {
+
+        throw new Error(
+          "signedURL이 응답에 없습니다."
+        );
+
+      }
+
+
+
+      /*
+        Signed URL 완성
+      */
+
+      const fullImageUrl =
+        data.signedURL.startsWith(
+          "http"
+        )
+
+          ? data.signedURL
+
+          :
+            SUPABASE_STORAGE_BASE +
+            data.signedURL;
+
+
+
+      /*
+        이미지 로딩 성공 처리
+      */
+
+      memoryImage.onload =
         () => {
+
+
+          memoryImage.style.display =
+            "block";
+
+
+          imagePlaceholder.style.display =
+            "none";
+
+
+          imagePathText.textContent =
+            "SIGNED PRIVATE IMAGE";
+
+
+        };
+
+
+
+      /*
+        이미지 실제 로딩 실패
+      */
+
+      memoryImage.onerror =
+        () => {
+
 
           memoryImage.style.display =
             "none";
 
+
           imagePlaceholder.style.display =
             "block";
 
-          placeholderText.textContent =
-            "이미지 주소의 유효 시간이 끝났거나 이미지를 불러오지 못했어요.";
 
-        }
+          placeholderText.textContent =
+            "이미지를 불러오지 못했어요. 임시 접근 주소를 다시 만들어주세요.";
+
+
+          imagePathText.textContent =
+            "이미지 로드 실패";
+
+
+        };
+
+
+
+      /*
+        실제 이미지 주소 적용
+      */
+
+      memoryImage.src =
+        fullImageUrl;
+
+
+    }
+
+
+    catch (error) {
+
+
+      console.error(
+        "signed image error:",
+        error
       );
+
+
+      memoryImage.style.display =
+        "none";
+
+
+      imagePlaceholder.style.display =
+        "block";
+
+
+      placeholderText.textContent =
+        "비공개 이미지를 불러오는 중 문제가 생겼어요.";
+
+
+      imagePathText.textContent =
+        "이미지 로드 실패";
+
 
     }
 
   }
 
 
-  /* ==========================================
-     INITIAL LOAD
-  ========================================== */
 
-  try {
+  /* =========================================================
+     INITIAL LOAD
+  ========================================================= */
+
+  async function initializeResultPage() {
+
+
+    /*
+      인터뷰 결과가 없음
+    */
 
     if (!storedResult) {
+
 
       showError(
         "재구성 결과를 찾지 못했어요. 처음부터 기억을 다시 시작해주세요."
       );
 
+
+      reconstructionPrompt.textContent =
+        "재구성 결과가 없어요.";
+
+
+      return;
+
     }
-    else {
+
+
+
+    try {
+
+
+      /*
+        sessionStorage JSON 파싱
+      */
 
       result =
         JSON.parse(
@@ -1146,7 +1760,10 @@
         );
 
 
-      /* 확실한 기억 */
+
+      /*
+        확실한 기억
+      */
 
       renderList(
         confirmedList,
@@ -1155,7 +1772,10 @@
       );
 
 
-      /* 불확실한 기억 */
+
+      /*
+        불확실한 기억
+      */
 
       renderList(
         uncertainList,
@@ -1164,62 +1784,135 @@
       );
 
 
-      /* reconstruction prompt */
+
+      /*
+        재구성 프롬프트
+      */
 
       reconstructionPrompt.textContent =
+
         result.reconstruction_prompt ||
+
         "재구성 설명이 없어요.";
 
 
-      /* reconstruction id */
 
-      reconstructionId.textContent =
+      /*
+        reconstruction ID
+      */
+
+      const reconstructionId =
+
         result.id ??
+
+        storedReconstructionId ??
+
+        null;
+
+
+
+      reconstructionIdElement.textContent =
+
+        reconstructionId ??
+
         "-";
 
 
-      /* memory id */
 
-      memoryId.textContent =
+      /*
+        Memory ID
+      */
+
+      const finalMemoryId =
+
         result.memory_id ??
+
         storedMemoryId ??
+
+        null;
+
+
+
+      memoryIdElement.textContent =
+
+        finalMemoryId ??
+
         "-";
 
 
-      /* image */
 
-      renderImage(
+      /*
+        DB에 저장된 Storage 경로 표시
+
+        예:
+
+        memory-images/reconstruction_4.png
+
+        실제 img 주소로 직접 쓰지는 않음.
+      */
+
+      const storagePath =
+
         result.image_url ||
+
         storedImagePath ||
-        ""
+
+        "";
+
+
+      if (storagePath) {
+
+        imagePathText.textContent =
+          storagePath;
+
+      }
+
+
+
+      /*
+        Private Storage Signed URL 요청
+      */
+
+      await loadPrivateMemoryImage(
+        reconstructionId
       );
+
+
+    }
+
+
+    catch (error) {
+
+
+      console.error(
+        "result initialization error:",
+        error
+      );
+
+
+      showError(
+        "결과 데이터를 읽는 중 문제가 생겼어요."
+      );
+
+
+      reconstructionPrompt.textContent =
+        "결과 데이터를 표시하지 못했어요.";
+
 
     }
 
   }
 
-  catch (error) {
-
-    console.error(
-      "result parse error:",
-      error
-    );
 
 
-    showError(
-      "결과 데이터를 읽는 중 문제가 생겼어요."
-    );
-
-  }
-
-
-  /* ==========================================
+  /* =========================================================
      NEW MEMORY
-  ========================================== */
+  ========================================================= */
 
   restartButton.addEventListener(
     "click",
     () => {
+
 
       const confirmed =
         window.confirm(
@@ -1228,33 +1921,89 @@
 
 
       if (!confirmed) {
+
         return;
+
       }
 
 
-      sessionStorage.clear();
 
+      /*
+        기억결 관련 sessionStorage 삭제
+      */
+
+      sessionStorage.removeItem(
+        "memoryGyeolMemoryId"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolOriginalRecall"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolCurrentQuestion"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolMemory"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolResult"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolReconstructionId"
+      );
+
+
+      sessionStorage.removeItem(
+        "memoryGyeolImagePath"
+      );
+
+
+
+      /*
+        첫 화면
+      */
 
       window.location.href =
         "./index.html";
+
 
     }
   );
 
 
-  /* ==========================================
+
+  /* =========================================================
      HOME
-  ========================================== */
+  ========================================================= */
 
   backButton.addEventListener(
     "click",
     () => {
 
+
       window.location.href =
         "./index.html";
 
+
     }
   );
+
+
+
+  /* =========================================================
+     START
+  ========================================================= */
+
+  initializeResultPage();
 
 </script>
 
