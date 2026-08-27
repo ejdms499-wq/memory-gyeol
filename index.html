@@ -2,14 +2,19 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>기억결 — 기억을 있는 그대로</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>기억결 — 기억의 시작</title>
 
   <style>
-    /* =========================================
-       기본 설정
-    ========================================= */
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -17,23 +22,36 @@
       padding: 0;
     }
 
+
     :root {
       --bg: #f4f1eb;
-      --paper: rgba(255, 255, 255, 0.72);
+
+      --paper:
+        rgba(255, 255, 255, 0.68);
+
       --text: #20201d;
+
       --sub: #77746d;
-      --line: rgba(32, 32, 29, 0.13);
+
+      --line:
+        rgba(32, 32, 29, 0.13);
+
       --accent: #31372f;
+
       --accent-soft: #dfe3da;
+
       --danger: #a35151;
     }
+
 
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
       min-height: 100vh;
+
       font-family:
         "Pretendard",
         "Noto Sans KR",
@@ -43,6 +61,7 @@
         sans-serif;
 
       color: var(--text);
+
       background:
         radial-gradient(
           circle at 15% 20%,
@@ -57,51 +76,68 @@
         var(--bg);
     }
 
+
     button,
     textarea {
       font: inherit;
     }
 
 
-    /* =========================================
-       전체 레이아웃
-    ========================================= */
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
 
     .page {
       min-height: 100vh;
+
       display: flex;
       flex-direction: column;
     }
 
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
     .header {
-      width: 100%;
       padding: 28px 42px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
     }
+
 
     .brand {
       display: flex;
       align-items: center;
+
       gap: 12px;
     }
+
 
     .logo-mark {
       width: 30px;
       height: 30px;
 
-      border: 1px solid rgba(32, 32, 29, 0.25);
-      border-radius: 50%;
-
       position: relative;
+
+      border:
+        1px solid
+        rgba(32, 32, 29, 0.25);
+
+      border-radius: 50%;
     }
+
 
     .logo-mark::before {
       content: "";
+
       position: absolute;
 
       width: 10px;
@@ -111,12 +147,16 @@
       top: 5px;
 
       border-radius: 50%;
+
       background: var(--accent);
+
       opacity: 0.78;
     }
 
+
     .logo-mark::after {
       content: "";
+
       position: absolute;
 
       width: 8px;
@@ -125,9 +165,12 @@
       right: 4px;
       bottom: 4px;
 
-      border: 1px solid var(--accent);
+      border:
+        1px solid var(--accent);
+
       border-radius: 50%;
     }
+
 
     .brand-name {
       font-family:
@@ -137,70 +180,72 @@
         serif;
 
       font-size: 21px;
+
       font-weight: 500;
-      letter-spacing: -0.02em;
     }
+
 
     .header-label {
       font-size: 11px;
+
       color: var(--sub);
 
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
     }
 
 
-    /* =========================================
-       메인
-    ========================================= */
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
 
     .main {
       width: 100%;
+
       max-width: 1180px;
 
       margin: 0 auto;
-      padding: 92px 40px 60px;
+
+      padding:
+        82px 36px 74px;
 
       flex: 1;
 
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 90px;
+
+      grid-template-columns:
+        0.95fr 1.05fr;
+
+      gap: 74px;
+
       align-items: center;
     }
 
 
-    /* =========================================
-       왼쪽 소개
-    ========================================= */
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
 
     .intro {
-      max-width: 470px;
+      max-width: 510px;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
 
-      margin-bottom: 26px;
+    .eyebrow {
+      margin-bottom: 18px;
 
       font-size: 11px;
+
       color: var(--sub);
 
       letter-spacing: 0.14em;
+
       text-transform: uppercase;
     }
 
-    .eyebrow::before {
-      content: "";
-
-      width: 28px;
-      height: 1px;
-
-      background: var(--sub);
-      opacity: 0.55;
-    }
 
     .intro h1 {
       margin-bottom: 28px;
@@ -211,80 +256,85 @@
         "Noto Serif KR",
         serif;
 
-      font-size: clamp(42px, 5vw, 67px);
+      font-size:
+        clamp(
+          48px,
+          6vw,
+          76px
+        );
+
+      line-height: 1.12;
+
       font-weight: 400;
 
-      line-height: 1.14;
-      letter-spacing: -0.045em;
+      letter-spacing: -0.055em;
+
+      word-break: keep-all;
     }
 
-    .intro h1 span {
-      color: #6e7469;
-    }
 
     .intro-copy {
-      max-width: 410px;
+      max-width: 430px;
 
-      font-size: 15px;
-      line-height: 1.9;
+      font-size: 13px;
+
+      line-height: 1.95;
+
       color: var(--sub);
 
       word-break: keep-all;
     }
 
-    .principles {
-      margin-top: 42px;
 
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .intro-copy strong {
+      color: var(--text);
 
-    .principle {
-      padding: 8px 12px;
-
-      border: 1px solid var(--line);
-      border-radius: 999px;
-
-      font-size: 11px;
-      color: #65635d;
-
-      background: rgba(255, 255, 255, 0.35);
+      font-weight: 600;
     }
 
 
-    /* =========================================
-       입력 카드
-    ========================================= */
+
+    /* =========================================================
+       MEMORY CARD
+    ========================================================= */
 
     .memory-card {
-      width: 100%;
+      padding: 34px;
 
-      padding: 38px;
+      border:
+        1px solid var(--line);
 
-      border: 1px solid rgba(32, 32, 29, 0.12);
-      border-radius: 24px;
+      border-radius: 26px;
 
       background: var(--paper);
 
-      box-shadow:
-        0 28px 70px rgba(49, 49, 42, 0.08);
+      backdrop-filter:
+        blur(12px);
 
-      backdrop-filter: blur(16px);
+      box-shadow:
+        0 28px 70px
+        rgba(
+          49,
+          49,
+          42,
+          0.07
+        );
     }
+
 
     .card-number {
-      margin-bottom: 18px;
+      margin-bottom: 10px;
 
-      font-family: Georgia, serif;
-      font-size: 12px;
+      font-size: 10px;
 
-      color: var(--sub);
-      letter-spacing: 0.1em;
+      color: #98948c;
+
+      letter-spacing: 0.14em;
     }
 
+
     .memory-card h2 {
-      margin-bottom: 9px;
+      margin-bottom: 12px;
 
       font-family:
         Georgia,
@@ -293,48 +343,44 @@
         serif;
 
       font-size: 27px;
+
       font-weight: 400;
 
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
     }
 
-    .card-description {
-      margin-bottom: 30px;
 
-      font-size: 13px;
+    .card-copy {
+      margin-bottom: 26px;
+
+      font-size: 12px;
+
       line-height: 1.75;
+
       color: var(--sub);
 
       word-break: keep-all;
     }
 
 
-    /* =========================================
-       기억 입력창
-    ========================================= */
+
+    /* =========================================================
+       TEXTAREA
+    ========================================================= */
 
     .memory-input-wrap {
       position: relative;
-    }
 
-    #memoryInput {
-      width: 100%;
-      min-height: 210px;
+      overflow: hidden;
 
-      padding: 22px 22px 50px;
+      border:
+        1px solid
+        rgba(32, 32, 29, 0.16);
 
-      resize: vertical;
+      border-radius: 17px;
 
-      border: 1px solid rgba(32, 32, 29, 0.16);
-      border-radius: 15px;
-
-      outline: none;
-
-      color: var(--text);
-      background: rgba(250, 249, 246, 0.82);
-
-      font-size: 15px;
-      line-height: 1.85;
+      background:
+        rgba(255, 255, 255, 0.45);
 
       transition:
         border-color 0.2s ease,
@@ -342,47 +388,88 @@
         background 0.2s ease;
     }
 
-    #memoryInput::placeholder {
-      color: #aaa69d;
-    }
 
-    #memoryInput:focus {
-      border-color: rgba(49, 55, 47, 0.45);
+    .memory-input-wrap:focus-within {
+      border-color:
+        rgba(49, 55, 47, 0.52);
 
-      background: rgba(255, 255, 255, 0.92);
+      background:
+        rgba(255, 255, 255, 0.68);
 
       box-shadow:
-        0 0 0 4px rgba(49, 55, 47, 0.06);
+        0 0 0 3px
+        rgba(49, 55, 47, 0.05);
     }
+
+
+    #memoryInput {
+      width: 100%;
+
+      min-height: 220px;
+
+      padding:
+        22px 22px 48px;
+
+      border: 0;
+
+      outline: 0;
+
+      resize: vertical;
+
+      color: #393833;
+
+      background: transparent;
+
+      font-size: 14px;
+
+      line-height: 1.85;
+    }
+
+
+    #memoryInput::placeholder {
+      color: #a6a198;
+
+      opacity: 1;
+    }
+
 
     .character-count {
       position: absolute;
 
-      right: 16px;
-      bottom: 14px;
+      right: 18px;
+      bottom: 15px;
 
       font-size: 10px;
-      color: #a29f97;
+
+      color: #9b978f;
 
       pointer-events: none;
     }
 
 
-    /* =========================================
-       도움말
-    ========================================= */
+
+    /* =========================================================
+       HINT
+    ========================================================= */
 
     .memory-hint {
-      margin-top: 15px;
+      margin-top: 16px;
 
       display: flex;
-      gap: 9px;
+
       align-items: flex-start;
 
+      gap: 9px;
+
       font-size: 11px;
-      line-height: 1.65;
-      color: #8a877f;
+
+      line-height: 1.7;
+
+      color: #89857d;
+
+      word-break: keep-all;
     }
+
 
     .hint-dot {
       width: 5px;
@@ -393,157 +480,253 @@
       flex-shrink: 0;
 
       border-radius: 50%;
-      background: #8f948a;
+
+      background:
+        rgba(49, 55, 47, 0.6);
     }
 
 
-    /* =========================================
-       버튼
-    ========================================= */
+
+    /* =========================================================
+       SUBMIT
+    ========================================================= */
 
     .submit-row {
-      margin-top: 28px;
+      margin-top: 25px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      gap: 16px;
+
+      gap: 22px;
     }
+
 
     .privacy-note {
-      max-width: 230px;
+      max-width: 300px;
 
       font-size: 10px;
-      line-height: 1.55;
-      color: #97938c;
+
+      line-height: 1.65;
+
+      color: #98948b;
+
+      word-break: keep-all;
     }
 
+
     #startButton {
-      min-width: 155px;
+      flex-shrink: 0;
 
-      padding: 15px 22px;
+      padding:
+        14px 21px;
 
-      border: 0;
+      border:
+        1px solid var(--accent);
+
       border-radius: 999px;
+
+      color: #f7f6f2;
+
+      background: var(--accent);
 
       cursor: pointer;
 
-      color: #f7f6f2;
-      background: var(--accent);
-
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12px;
 
       transition:
         transform 0.18s ease,
-        opacity 0.18s ease,
-        background 0.18s ease;
+        opacity 0.18s ease;
     }
 
-    #startButton:hover {
-      transform: translateY(-1px);
-      background: #22271f;
+
+    #startButton:hover:not(:disabled) {
+      transform:
+        translateY(-1px);
+
+      opacity: 0.92;
     }
 
-    #startButton:active {
-      transform: translateY(0);
-    }
 
     #startButton:disabled {
       cursor: wait;
-      opacity: 0.55;
-      transform: none;
+
+      opacity: 0.58;
     }
 
 
-    /* =========================================
-       상태 메시지
-    ========================================= */
+
+    /* =========================================================
+       STATUS MESSAGE
+    ========================================================= */
 
     #statusMessage {
-      min-height: 20px;
+      min-height: 22px;
+
       margin-top: 18px;
 
+      padding-left: 2px;
+
       font-size: 12px;
+
       line-height: 1.6;
 
       color: var(--sub);
+
+      transition:
+        color 0.2s ease;
     }
+
 
     #statusMessage.error {
       color: var(--danger);
+
+      font-weight: 500;
     }
 
 
-    /* =========================================
-       하단
-    ========================================= */
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     .footer {
-      padding: 22px 42px 30px;
+      padding:
+        22px 42px 30px;
 
       display: flex;
+
       justify-content: space-between;
+
       gap: 20px;
 
       font-size: 10px;
+
       color: #9b978e;
     }
 
 
-    /* =========================================
-       모바일
-    ========================================= */
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 900px) {
+
       .header {
-        padding: 22px 22px;
+        padding:
+          22px 22px;
       }
+
 
       .header-label {
         display: none;
       }
 
-      .main {
-        padding: 58px 22px 45px;
 
-        grid-template-columns: 1fr;
+      .main {
+        padding:
+          58px 22px 45px;
+
+        grid-template-columns:
+          1fr;
+
         gap: 48px;
       }
+
 
       .intro {
         max-width: 620px;
       }
 
+
       .intro h1 {
-        font-size: clamp(40px, 11vw, 60px);
+        font-size:
+          clamp(
+            40px,
+            11vw,
+            60px
+          );
       }
 
+
       .memory-card {
-        padding: 26px 20px;
-        border-radius: 20px;
+        padding:
+          26px 20px;
+
+        border-radius:
+          20px;
       }
+
+
+      #memoryInput {
+        min-height:
+          190px;
+      }
+
 
       .submit-row {
         flex-direction: column;
+
         align-items: stretch;
       }
+
 
       #startButton {
         width: 100%;
       }
 
+
       .privacy-note {
         max-width: none;
+
         order: 2;
       }
 
+
       .footer {
-        padding: 20px 22px 28px;
+        padding:
+          20px 22px 28px;
+
         flex-direction: column;
       }
     }
+
+
+    @media (max-width: 520px) {
+
+      .main {
+        padding-left:
+          16px;
+
+        padding-right:
+          16px;
+      }
+
+
+      .memory-card {
+        padding:
+          22px 16px;
+      }
+
+
+      .intro h1 {
+        font-size:
+          42px;
+      }
+
+
+      #memoryInput {
+        font-size:
+          13px;
+      }
+
+    }
+
   </style>
+
 </head>
 
 
@@ -551,16 +734,23 @@
 
   <div class="page">
 
-    <!-- =====================================
+
+    <!-- =====================================================
          HEADER
-    ====================================== -->
+    ====================================================== -->
 
     <header class="header">
 
       <div class="brand">
+
         <div class="logo-mark"></div>
-        <div class="brand-name">기억결</div>
+
+        <div class="brand-name">
+          기억결
+        </div>
+
       </div>
+
 
       <div class="header-label">
         Recall First · Memory Reconstruction
@@ -569,63 +759,86 @@
     </header>
 
 
-    <!-- =====================================
+
+    <!-- =====================================================
          MAIN
-    ====================================== -->
+    ====================================================== -->
 
     <main class="main">
 
-      <!-- 왼쪽 -->
+
+      <!-- ===============================================
+           INTRO
+      ================================================ -->
 
       <section class="intro">
 
         <div class="eyebrow">
-          Recall First
+          01 · FIRST RECALL
         </div>
+
 
         <h1>
-          기억을 채우지 않고,<br />
-          <span>기억의 결을 따라가요.</span>
+          기억의 시작은<br />
+          떠오르는 그대로.
         </h1>
 
-        <p class="intro-copy">
-          기억결은 흐릿한 기억을 그럴듯하게 만들어내지 않아요.
-          당신이 확실히 기억하는 것과,
-          어렴풋이 떠오르는 것,
-          아직 기억나지 않는 것을 구분하면서
-          하나의 장면을 천천히 복원해요.
-        </p>
 
-        <div class="principles">
-          <span class="principle">확실한 기억</span>
-          <span class="principle">불확실한 기억</span>
-          <span class="principle">기억하지 못하는 것</span>
-        </div>
+        <p class="intro-copy">
+
+          완벽하게 기억하려고 하지 않아도 괜찮아요.
+
+          <strong>
+            확실한 것과 확실하지 않은 것을 섞지 않고
+          </strong>
+
+          지금 떠오르는 첫 기억부터 천천히 따라갈게요.
+
+          기억결은 빈 부분을 마음대로 채우기보다,
+          기억하고 있는 것과 기억하지 못하는 것의 경계를
+          그대로 남기는 데서 시작해요.
+
+        </p>
 
       </section>
 
 
-      <!-- 오른쪽 입력 -->
+
+      <!-- ===============================================
+           INPUT CARD
+      ================================================ -->
 
       <section class="memory-card">
 
         <div class="card-number">
-          01 · FIRST RECALL
+          STEP 01
         </div>
 
+
         <h2>
-          가장 먼저 떠오르는 기억을 적어주세요.
+          처음 떠오르는 기억
         </h2>
 
-        <p class="card-description">
-          정확하지 않아도 괜찮아요.
-          생각나는 만큼만 적어주세요.
-          AI가 먼저 빈칸을 채우지 않아요.
+
+        <p class="card-copy">
+          정확한 날짜나 장소를 모르더라도 괜찮아요.
+          지금 생각나는 장면을 말하듯 적어주세요.
         </p>
 
-        <form id="memoryForm">
+
+
+        <!-- novalidate:
+             브라우저 기본 오류 대신
+             기억결 자체 안내 문구를 사용한다. -->
+
+        <form
+          id="memoryForm"
+          novalidate
+        >
+
 
           <div class="memory-input-wrap">
+
 
             <textarea
               id="memoryInput"
@@ -634,30 +847,39 @@
               placeholder="예) 초등학생 때 여름에 할머니 집에 갔던 기억이 있어. 마당에서 사촌이랑 놀았는데 정확히 몇 년인지는 잘 모르겠어."
             ></textarea>
 
+
             <div class="character-count">
               <span id="characterCount">0</span> / 1500
             </div>
 
+
           </div>
 
 
+
           <div class="memory-hint">
+
             <span class="hint-dot"></span>
+
 
             <span>
               날짜, 사람, 장소가 정확하지 않아도 괜찮아요.
               “~였던 것 같아”, “잘 기억나지 않아” 같은 표현도
               그대로 적어주세요.
             </span>
+
           </div>
 
 
+
           <div class="submit-row">
+
 
             <p class="privacy-note">
               입력한 기억은 재구성 인터뷰를 시작하기 위한
               최초 기억으로 사용돼요.
             </p>
+
 
             <button
               id="startButton"
@@ -666,7 +888,9 @@
               기억 따라가기 →
             </button>
 
+
           </div>
+
 
 
           <div
@@ -674,16 +898,19 @@
             aria-live="polite"
           ></div>
 
+
         </form>
 
       </section>
 
+
     </main>
 
 
-    <!-- =====================================
+
+    <!-- =====================================================
          FOOTER
-    ====================================== -->
+    ====================================================== -->
 
     <footer class="footer">
 
@@ -691,55 +918,79 @@
         MEMORY GYEOL · 기억 재구성 프로젝트
       </span>
 
+
       <span>
         기억하지 못하는 것은 기억하지 못하는 채로.
       </span>
 
     </footer>
 
+
   </div>
 
 
-  <!-- =====================================
+
+  <!-- =====================================================
        JAVASCRIPT
-  ====================================== -->
+  ====================================================== -->
 
   <script>
 
-    /*
-      기억결 n8n Production Webhook
+    /* =========================================================
+       API SETTINGS
 
-      중요:
-      OpenAI API Key
-      Supabase Secret
-      n8n Credential
+       n8n Production Webhook
 
-      같은 비밀정보는 프론트 코드에 절대 넣지 않음.
-    */
+       중요:
+       OpenAI API Key
+       Supabase Secret
+       n8n Credential 같은 비밀정보는
+       절대로 프론트 코드에 넣지 않는다.
+    ========================================================= */
 
     const MEMORY_START_WEBHOOK =
       "https://soykim0516.app.n8n.cloud/webhook/memory-start";
 
 
+
+    /* =========================================================
+       DOM
+    ========================================================= */
+
     const form =
-      document.getElementById("memoryForm");
+      document.getElementById(
+        "memoryForm"
+      );
+
 
     const memoryInput =
-      document.getElementById("memoryInput");
+      document.getElementById(
+        "memoryInput"
+      );
+
 
     const startButton =
-      document.getElementById("startButton");
+      document.getElementById(
+        "startButton"
+      );
+
 
     const statusMessage =
-      document.getElementById("statusMessage");
+      document.getElementById(
+        "statusMessage"
+      );
+
 
     const characterCount =
-      document.getElementById("characterCount");
+      document.getElementById(
+        "characterCount"
+      );
 
 
-    /* -------------------------------------
+
+    /* =========================================================
        글자 수
-    ------------------------------------- */
+    ========================================================= */
 
     memoryInput.addEventListener(
       "input",
@@ -748,17 +999,40 @@
         characterCount.textContent =
           memoryInput.value.length;
 
+
+        /*
+          사용자가 다시 입력하기 시작하면
+          기존의 빈칸 오류 문구는 지운다.
+        */
+
+        if (
+          statusMessage.classList.contains(
+            "error"
+          ) &&
+          memoryInput.value.trim().length > 0
+        ) {
+
+          setStatus("");
+
+        }
+
       }
     );
 
 
-    /* -------------------------------------
+
+    /* =========================================================
        상태 메시지
-    ------------------------------------- */
+    ========================================================= */
 
-    function setStatus(message, isError = false) {
+    function setStatus(
+      message,
+      isError = false
+    ) {
 
-      statusMessage.textContent = message;
+      statusMessage.textContent =
+        message;
+
 
       statusMessage.classList.toggle(
         "error",
@@ -768,9 +1042,10 @@
     }
 
 
-    /* -------------------------------------
+
+    /* =========================================================
        최초 기억 전송
-    ------------------------------------- */
+    ========================================================= */
 
     form.addEventListener(
       "submit",
@@ -783,7 +1058,10 @@
           memoryInput.value.trim();
 
 
-        /* 입력 검사 */
+
+        /* -----------------------------------------------------
+           1. 빈칸 검사
+        ----------------------------------------------------- */
 
         if (!originalRecall) {
 
@@ -792,14 +1070,19 @@
             true
           );
 
+
           memoryInput.focus();
+
 
           return;
 
         }
 
 
-        /* 너무 짧은 입력 방지 */
+
+        /* -----------------------------------------------------
+           2. 너무 짧은 입력
+        ----------------------------------------------------- */
 
         if (originalRecall.length < 5) {
 
@@ -808,47 +1091,74 @@
             true
           );
 
+
           memoryInput.focus();
+
 
           return;
 
         }
 
 
-        /* 로딩 상태 */
 
-        startButton.disabled = true;
+        /* -----------------------------------------------------
+           3. 로딩
+        ----------------------------------------------------- */
+
+        startButton.disabled =
+          true;
+
 
         startButton.textContent =
           "기억을 정리하는 중…";
+
 
         setStatus(
           "처음 떠올린 기억을 그대로 보존하고 있어요."
         );
 
 
+
         try {
+
+
+          /* ---------------------------------------------------
+             4. n8n memory-start 호출
+          --------------------------------------------------- */
 
           const response =
             await fetch(
               MEMORY_START_WEBHOOK,
               {
-                method: "POST",
+
+                method:
+                  "POST",
+
 
                 headers: {
+
                   "Content-Type":
                     "application/json"
+
                 },
 
-                body: JSON.stringify({
-                  original_recall:
-                    originalRecall
-                })
+
+                body:
+                  JSON.stringify({
+
+                    original_recall:
+                      originalRecall
+
+                  })
+
               }
             );
 
 
-          /* 서버 오류 */
+
+          /* ---------------------------------------------------
+             5. HTTP 오류
+          --------------------------------------------------- */
 
           if (!response.ok) {
 
@@ -859,11 +1169,19 @@
           }
 
 
+
+          /* ---------------------------------------------------
+             6. 응답 JSON
+          --------------------------------------------------- */
+
           const memoryData =
             await response.json();
 
 
-          /* memory_id 확인 */
+
+          /* ---------------------------------------------------
+             7. memory_id 확인
+          --------------------------------------------------- */
 
           if (!memoryData.id) {
 
@@ -874,17 +1192,16 @@
           }
 
 
-          /*
-            인터뷰 페이지에서 사용할 데이터를
-            브라우저 sessionStorage에 저장.
 
-            브라우저를 닫으면 사라지는 임시 저장소라
-            초기 개발 단계에서 사용하기 좋음.
-          */
+          /* ---------------------------------------------------
+             8. sessionStorage 저장
+          --------------------------------------------------- */
 
           sessionStorage.setItem(
             "memoryGyeolMemoryId",
-            String(memoryData.id)
+            String(
+              memoryData.id
+            )
           );
 
 
@@ -896,14 +1213,21 @@
 
           sessionStorage.setItem(
             "memoryGyeolMemory",
-            JSON.stringify(memoryData)
+            JSON.stringify(
+              memoryData
+            )
           );
 
 
-          /* 첫 AI 질문 */
+
+          /* ---------------------------------------------------
+             9. 첫 AI 질문 저장
+          --------------------------------------------------- */
 
           if (
-            Array.isArray(memoryData.questions) &&
+            Array.isArray(
+              memoryData.questions
+            ) &&
             memoryData.questions.length > 0
           ) {
 
@@ -913,22 +1237,29 @@
             );
 
           }
+          else {
 
+            sessionStorage.removeItem(
+              "memoryGyeolCurrentQuestion"
+            );
+
+          }
+
+
+
+          /* ---------------------------------------------------
+             10. 이동 안내
+          --------------------------------------------------- */
 
           setStatus(
             "기억이 저장됐어요. 인터뷰를 시작할게요."
           );
 
 
-          /*
-            다음 단계
 
-            아직 interview.html을 만들지 않았기 때문에
-            지금 버튼을 실제로 눌러 테스트하면
-            다음 페이지가 없어서 404가 나올 수 있음.
-
-            interview.html을 만든 뒤 정상 동작함.
-          */
+          /* ---------------------------------------------------
+             11. 인터뷰 페이지 이동
+          --------------------------------------------------- */
 
           setTimeout(
             () => {
@@ -937,12 +1268,15 @@
                 "./interview.html";
 
             },
-            500
+            450
           );
+
 
         }
 
+
         catch (error) {
+
 
           console.error(
             "memory-start error:",
@@ -959,8 +1293,10 @@
           startButton.disabled =
             false;
 
+
           startButton.textContent =
             "기억 따라가기 →";
+
 
         }
 
