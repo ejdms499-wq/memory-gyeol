@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>기억결 — 재구성된 기억</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f1eb;
+      --paper: rgba(255, 255, 255, 0.72);
+      --text: #20201d;
+      --sub: #77746d;
+      --line: rgba(32, 32, 29, 0.13);
+      --accent: #31372f;
+      --accent-soft: #dfe3da;
+      --uncertain: #8c7b66;
+      --danger: #a35151;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+
+      font-family:
+        "Pretendard",
+        "Noto Sans KR",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(228, 221, 207, 0.75),
+          transparent 33%
+        ),
+        radial-gradient(
+          circle at 85% 85%,
+          rgba(212, 218, 206, 0.6),
+          transparent 30%
+        ),
+        var(--bg);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .header {
+      padding: 28px 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+
+      border: 1px solid rgba(32, 32, 29, 0.25);
+      border-radius: 50%;
+
+      position: relative;
+    }
+
+    .logo-mark::before {
+      content: "";
+
+      position: absolute;
+
+      width: 10px;
+      height: 10px;
+
+      left: 5px;
+      top: 5px;
+
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.78;
+    }
+
+    .logo-mark::after {
+      content: "";
+
+      position: absolute;
+
+      width: 8px;
+      height: 8px;
+
+      right: 4px;
+      bottom: 4px;
+
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    .header-label {
+      font-size: 11px;
+      color: var(--sub);
+
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    .main {
+      width: 100%;
+      max-width: 1180px;
+
+      margin: 0 auto;
+      padding: 72px 36px 70px;
+
+      flex: 1;
+    }
+
+    .result-heading {
+      margin-bottom: 44px;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .eyebrow {
+      margin-bottom: 13px;
+
+      font-size: 11px;
+      color: var(--sub);
+
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .result-heading h1 {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 400;
+
+      line-height: 1.17;
+      letter-spacing: -0.045em;
+    }
+
+    .heading-copy {
+      max-width: 330px;
+
+      font-size: 12px;
+      line-height: 1.75;
+      color: var(--sub);
+
+      word-break: keep-all;
+    }
+
+    /* =========================================
+       RESULT GRID
+    ========================================= */
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* =========================================
+       IMAGE
+    ========================================= */
+
+    .image-card {
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 24px;
+
+      background: rgba(255, 255, 255, 0.52);
+
+      box-shadow:
+        0 28px 70px rgba(49, 49, 42, 0.07);
+    }
+
+    .image-stage {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(222, 220, 211, 0.72),
+          rgba(237, 235, 228, 0.5)
+        );
+    }
+
+    #memoryImage {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: none;
+    }
+
+    .image-placeholder {
+      padding: 38px;
+
+      text-align: center;
+
+      max-width: 400px;
+    }
+
+    .placeholder-mark {
+      width: 64px;
+      height: 64px;
+
+      margin: 0 auto 20px;
+
+      position: relative;
+
+      border: 1px solid rgba(32, 32, 29, 0.2);
+      border-radius: 50%;
+    }
+
+    .placeholder-mark::before {
+      content: "";
+
+      position: absolute;
+
+      width: 20px;
+      height: 20px;
+
+      left: 10px;
+      top: 10px;
+
+      border-radius: 50%;
+      background: rgba(49, 55, 47, 0.75);
+    }
+
+    .placeholder-mark::after {
+      content: "";
+
+      position: absolute;
+
+      width: 17px;
+      height: 17px;
+
+      right: 8px;
+      bottom: 8px;
+
+      border-radius: 50%;
+      border: 1px solid rgba(49, 55, 47, 0.8);
+    }
+
+    .image-placeholder h2 {
+      margin-bottom: 10px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Noto Serif KR",
+        serif;
+
+      font-size: 22px;
+      font-weight: 400;
+    }
+
+    .image-placeholder p {
+      color: var(--sub);
+
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .image-info {
+      padding: 18px 21px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      border-top: 1px solid var(--line);
+
+      font-size: 10px;
+      color: #918d84;
+    }
+
+    #imagePathText {
+      max-width: 70%;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .private-label {
+      padding: 5px 9px;
+
+      border: 1px solid var(--line);
+      border-radius: 999px;
+
+      white-space: nowrap;
+    }
+
+    /* =========================================
+       MEMORY PANEL
+    ========================================= */
+
+    .memory-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 26px;
+
+      border: 1px solid var(--line);
+      border-radius: 19px;
+
+      background: var(--paper);
+
+      backdrop-filter: blur(12px);
+    }
+
+    .panel-label {
+      margin-bottom: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-size: 10px;
+      color: var(--sub);
+
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .panel-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .panel.uncertain .panel-label::before {
+      background: var(--uncertain);
+    }
+
+    .memory-list {
+      list-style: none;
+
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .memory-list li {
+      position: relative;
+
+      padding-left: 18px;
+
+      font-size: 13px;
+      line-height: 1.65;
+
+      color: #57544e;
+
+      word-break: keep-all;
+    }
+
+    .memory-list li::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 8px;
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+      background: rgba(49, 55, 47, 0.66);
+    }
+
+    .uncertain .memory-list li {
+      color: #776d61;
+    }
+
+    .uncertain .memory-list li::before {
+      border: 1px solid #94836e;
+      background: transparent;
+    }
+
+    .empty-message {
+      font-size: 12px;
+      line-height: 1.65;
+      color: #99958e;
+    }
+
+    /* =========================================
+       PROMPT / SUMMARY
+    ========================================= */
+
+    .summary-panel {
+      margin-top: 28px;
+
+      padding: 28px;
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .summary-label {
+      margin-bottom: 14px;
+
+      font-size: 10px;
+      color: #969289;
+
+      letter-spacing: 0.12em;
+    }
+
+    #reconstructionPrompt {
+      font-size: 13px;
+      line-height: 1.85;
+      color: #69665f;
+
+      word-break: keep-all;
+    }
+
+    /* =========================================
+       ACTIONS
+    ========================================= */
+
+    .actions {
+      margin-top: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .result-meta {
+      font-size: 10px;
+      line-height: 1.6;
+      color: #97938b;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 9px;
+    }
+
+    .button {
+      padding: 13px 19px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+      transition:
+        transform 0.18s ease,
+        opacity 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      border: 1px solid var(--line);
+
+      color: #69665f;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .button.primary {
+      border: 1px solid var(--accent);
+
+      color: #f7f6f2;
+      background: var(--accent);
+    }
+
+    /* =========================================
+       ERROR
+    ========================================= */
+
+    .error-box {
+      display: none;
+
+      margin-bottom: 22px;
+      padding: 16px 18px;
+
+      border: 1px solid rgba(163, 81, 81, 0.25);
+      border-radius: 13px;
+
+      color: var(--danger);
+      background: rgba(163, 81, 81, 0.05);
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .error-box.visible {
+      display: block;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer {
+      padding: 22px 42px 30px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      font-size: 10px;
+      color: #9b978e;
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 850px) {
+      .header {
+        padding: 21px 20px;
+      }
+
+      .header-label {
+        display: none;
+      }
+
+      .main {
+        padding: 48px 20px 50px;
+      }
+
+      .result-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-card {
+        border-radius: 20px;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .action-buttons {
+        width: 100%;
+      }
+
+      .button {
+        flex: 1;
+      }
+
+      .footer {
+        padding: 20px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- =====================================
+       HEADER
+  ====================================== -->
+
+  <header class="header">
+
+    <div class="brand">
+      <div class="logo-mark"></div>
+      <div class="brand-name">기억결</div>
+    </div>
+
+    <div class="header-label">
+      Reconstructed Memory
+    </div>
+
+  </header>
+
+
+  <!-- =====================================
+       MAIN
+  ====================================== -->
+
+  <main class="main">
+
+    <section class="result-heading">
+
+      <div>
+        <div class="eyebrow">
+          03 · MEMORY RECONSTRUCTION
+        </div>
+
+        <h1>
+          기억의 한 장면이<br />
+          다시 이어졌어요.
+        </h1>
+      </div>
+
+      <p class="heading-copy">
+        확실히 기억하는 것은 선명하게,
+        확실하지 않은 것은 확실하지 않은 채로 남겼어요.
+        이 이미지는 기억의 정답이 아니라
+        지금 떠올릴 수 있는 기억의 경계를 담은 재구성이에요.
+      </p>
+
+    </section>
+
+
+    <div
+      id="errorBox"
+      class="error-box"
+    ></div>
+
+
+    <section class="result-grid">
+
+      <!-- =================================
+           IMAGE
+      ================================== -->
+
+      <article class="image-card">
+
+        <div class="image-stage">
+
+          <img
+            id="memoryImage"
+            alt="재구성된 기억 이미지"
+          />
+
+          <div
+            id="imagePlaceholder"
+            class="image-placeholder"
+          >
+
+            <div class="placeholder-mark"></div>
+
+            <h2>
+              재구성 이미지를 준비했어요.
+            </h2>
+
+            <p id="placeholderText">
+              현재 이미지는 비공개 저장소에 안전하게 보관돼 있어요.
+              다음 단계에서 안전한 임시 주소를 연결하면
+              이 영역에 실제 이미지가 표시돼요.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="image-info">
+
+          <span id="imagePathText">
+            IMAGE PATH
+          </span>
+
+          <span class="private-label">
+            PRIVATE STORAGE
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- =================================
+           MEMORY DATA
+      ================================== -->
+
+      <aside class="memory-panel">
+
+        <section class="panel">
+
+          <div class="panel-label">
+            Confirmed Memory
+          </div>
+
+          <ul
+            id="confirmedList"
+            class="memory-list"
+          ></ul>
+
+          <p
+            id="confirmedEmpty"
+            class="empty-message"
+          >
+            확인된 기억이 없어요.
+          </p>
+
+        </section>
+
+
+        <section class="panel uncertain">
+
+          <div class="panel-label">
+            Uncertain Memory
+          </div>
+
+          <ul
+            id="uncertainList"
+            class="memory-list"
+          ></ul>
+
+          <p
+            id="uncertainEmpty"
+            class="empty-message"
+          >
+            불확실하게 남은 기억이 없어요.
+          </p>
+
+        </section>
+
+      </aside>
+
+    </section>
+
+
+    <!-- =====================================
+         RECONSTRUCTION DESCRIPTION
+    ====================================== -->
+
+    <section class="summary-panel">
+
+      <div class="summary-label">
+        RECONSTRUCTION NOTE
+      </div>
+
+      <p id="reconstructionPrompt">
+        재구성 정보를 불러오는 중…
+      </p>
+
+    </section>
+
+
+    <!-- =====================================
+         ACTIONS
+    ====================================== -->
+
+    <section class="actions">
+
+      <div class="result-meta">
+
+        <div>
+          Reconstruction ID:
+          <span id="reconstructionId">-</span>
+        </div>
+
+        <div>
+          Memory ID:
+          <span id="memoryId">-</span>
+        </div>
+
+      </div>
+
+
+      <div class="action-buttons">
+
+        <button
+          id="restartButton"
+          class="button secondary"
+          type="button"
+        >
+          새로운 기억 시작
+        </button>
+
+        <button
+          id="backButton"
+          class="button primary"
+          type="button"
+        >
+          처음 화면으로
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================
+       FOOTER
+  ====================================== -->
+
+  <footer class="footer">
+
+    <span>
+      MEMORY GYEOL · RECALL FIRST
+    </span>
+
+    <span>
+      기억하지 못하는 것은 기억하지 못하는 채로.
+    </span>
+
+  </footer>
+
+</div>
+
+
+<script>
+
+  /* ==========================================
+     RESULT DATA
+  ========================================== */
+
+  const storedResult =
+    sessionStorage.getItem(
+      "memoryGyeolResult"
+    );
+
+  const storedMemoryId =
+    sessionStorage.getItem(
+      "memoryGyeolMemoryId"
+    );
+
+  const storedImagePath =
+    sessionStorage.getItem(
+      "memoryGyeolImagePath"
+    );
+
+
+  let result = null;
+
+
+  /* ==========================================
+     DOM
+  ========================================== */
+
+  const confirmedList =
+    document.getElementById(
+      "confirmedList"
+    );
+
+  const uncertainList =
+    document.getElementById(
+      "uncertainList"
+    );
+
+  const confirmedEmpty =
+    document.getElementById(
+      "confirmedEmpty"
+    );
+
+  const uncertainEmpty =
+    document.getElementById(
+      "uncertainEmpty"
+    );
+
+  const reconstructionPrompt =
+    document.getElementById(
+      "reconstructionPrompt"
+    );
+
+  const reconstructionId =
+    document.getElementById(
+      "reconstructionId"
+    );
+
+  const memoryId =
+    document.getElementById(
+      "memoryId"
+    );
+
+  const imagePathText =
+    document.getElementById(
+      "imagePathText"
+    );
+
+  const memoryImage =
+    document.getElementById(
+      "memoryImage"
+    );
+
+  const imagePlaceholder =
+    document.getElementById(
+      "imagePlaceholder"
+    );
+
+  const placeholderText =
+    document.getElementById(
+      "placeholderText"
+    );
+
+  const errorBox =
+    document.getElementById(
+      "errorBox"
+    );
+
+  const restartButton =
+    document.getElementById(
+      "restartButton"
+    );
+
+  const backButton =
+    document.getElementById(
+      "backButton"
+    );
+
+
+  /* ==========================================
+     ERROR
+  ========================================== */
+
+  function showError(message) {
+
+    errorBox.textContent =
+      message;
+
+    errorBox.classList.add(
+      "visible"
+    );
+
+  }
+
+
+  /* ==========================================
+     LIST RENDER
+  ========================================== */
+
+  function renderList(
+    target,
+    emptyElement,
+    items
+  ) {
+
+    target.innerHTML = "";
+
+
+    if (
+      !Array.isArray(items) ||
+      items.length === 0
+    ) {
+
+      emptyElement.style.display =
+        "block";
+
+      return;
+
+    }
+
+
+    emptyElement.style.display =
+      "none";
+
+
+    items.forEach(
+      (item) => {
+
+        const li =
+          document.createElement(
+            "li"
+          );
+
+        li.textContent =
+          item;
+
+        target.appendChild(
+          li
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     IMAGE
+  ========================================== */
+
+  function renderImage(
+    imageValue
+  ) {
+
+    if (!imageValue) {
+
+      imagePathText.textContent =
+        "이미지 경로 없음";
+
+      return;
+
+    }
+
+
+    imagePathText.textContent =
+      imageValue;
+
+
+    /*
+      현재 Supabase memory-images 버킷은 PRIVATE.
+
+      그래서 DB에 저장된:
+
+      memory-images/reconstruction_4.png
+
+      같은 경로를 그대로 img.src에 넣으면
+      브라우저에서 접근할 수 없음.
+
+      만약 나중에 signed URL을 전달받아
+      imageValue가 https:// 로 시작한다면
+      자동으로 실제 이미지를 표시하도록 준비해둠.
+    */
+
+
+    if (
+      imageValue.startsWith(
+        "https://"
+      ) ||
+      imageValue.startsWith(
+        "http://"
+      )
+    ) {
+
+      memoryImage.src =
+        imageValue;
+
+      memoryImage.style.display =
+        "block";
+
+      imagePlaceholder.style.display =
+        "none";
+
+
+      memoryImage.addEventListener(
+        "error",
+        () => {
+
+          memoryImage.style.display =
+            "none";
+
+          imagePlaceholder.style.display =
+            "block";
+
+          placeholderText.textContent =
+            "이미지 주소의 유효 시간이 끝났거나 이미지를 불러오지 못했어요.";
+
+        }
+      );
+
+    }
+
+  }
+
+
+  /* ==========================================
+     INITIAL LOAD
+  ========================================== */
+
+  try {
+
+    if (!storedResult) {
+
+      showError(
+        "재구성 결과를 찾지 못했어요. 처음부터 기억을 다시 시작해주세요."
+      );
+
+    }
+    else {
+
+      result =
+        JSON.parse(
+          storedResult
+        );
+
+
+      /* 확실한 기억 */
+
+      renderList(
+        confirmedList,
+        confirmedEmpty,
+        result.confirmed_elements
+      );
+
+
+      /* 불확실한 기억 */
+
+      renderList(
+        uncertainList,
+        uncertainEmpty,
+        result.uncertain_elements
+      );
+
+
+      /* reconstruction prompt */
+
+      reconstructionPrompt.textContent =
+        result.reconstruction_prompt ||
+        "재구성 설명이 없어요.";
+
+
+      /* reconstruction id */
+
+      reconstructionId.textContent =
+        result.id ??
+        "-";
+
+
+      /* memory id */
+
+      memoryId.textContent =
+        result.memory_id ??
+        storedMemoryId ??
+        "-";
+
+
+      /* image */
+
+      renderImage(
+        result.image_url ||
+        storedImagePath ||
+        ""
+      );
+
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "result parse error:",
+      error
+    );
+
+
+    showError(
+      "결과 데이터를 읽는 중 문제가 생겼어요."
+    );
+
+  }
+
+
+  /* ==========================================
+     NEW MEMORY
+  ========================================== */
+
+  restartButton.addEventListener(
+    "click",
+    () => {
+
+      const confirmed =
+        window.confirm(
+          "현재 결과를 나가고 새로운 기억을 시작할까요?"
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      sessionStorage.clear();
+
+
+      window.location.href =
+        "./index.html";
+
+    }
+  );
+
+
+  /* ==========================================
+     HOME
+  ========================================== */
+
+  backButton.addEventListener(
+    "click",
+    () => {
+
+      window.location.href =
+        "./index.html";
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
